@@ -22,6 +22,9 @@ private:
 	vector<tagBullet> _vBullet;
 	vector<tagBullet>::iterator _viBullet;
 
+
+	int test;
+
 	const char* _imageName;
 	float _range;
 	int _bulletMax;
