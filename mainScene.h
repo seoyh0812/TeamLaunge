@@ -18,6 +18,7 @@ private:
 
 	vector<int> bottomY;
 	char _str[128];
+	RECT _loopRc;  int _loopX;	int _loopY; // µÞ¹è°æ ·çÇÁ·»´õ¿ë
 public:
 	mainScene();
 	~mainScene();
@@ -28,5 +29,6 @@ public:
 	virtual void render();
 
 	void zOrderRender();
+	void cameraControl();
 };
 

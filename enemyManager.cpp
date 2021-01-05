@@ -11,7 +11,7 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
-	createMinion(700, 500); // 제트오더 연습용으로 만들었으니 없애도 됨
+	createMinion(CAMX+700, CAMY+500); // 제트오더 연습용으로 만들었으니 없애도 됨
 	return S_OK;
 }
 

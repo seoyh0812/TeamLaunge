@@ -19,7 +19,7 @@ player::~player()
 HRESULT player::init()
 {
 	_flyX = _groundX = 100.f;
-	_flyY = _groundY = 300.f;
+	_flyY = _groundY = CAMY + 300.f;
 	_directionChanged = _directionChangeCount = _dirMemory = _dirMemoryCount = 0;
 	_flyRc = RectMakeCenter(_flyX, _flyY, 50, 50);
 	_groundRc = RectMakeCenter(_groundX, _groundY, 20, 20);

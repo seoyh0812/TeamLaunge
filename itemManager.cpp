@@ -11,7 +11,7 @@ itemManager::~itemManager()
 
 HRESULT itemManager::init()
 {
-	createBaseball(300, 500);
+	createBaseball(300, CAMY + 500);
 	return S_OK;
 }
 

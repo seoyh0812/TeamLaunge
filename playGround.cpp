@@ -43,13 +43,10 @@ void playGround::update()
 
 void playGround::render()
 {
-	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
+	PatBlt(getMemDC(), 0, 0, CAMX+WINSIZEX, CAMY+WINSIZEY, WHITENESS);
 	//================ 위에 건들지 마라 ==============================
 	
-	//IMAGEMANAGER->findImage("새배경")->render(getMemDC());	
-	
 	SCENEMANAGER->render();
-
 	
 	//================= 아래도 건들지 마라 ==============================
 	_backBuffer->render(getHDC(), 0, 0, CAMX, CAMY, WINSIZEX, WINSIZEY);

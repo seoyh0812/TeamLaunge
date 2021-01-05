@@ -12,7 +12,7 @@ stageManager::~stageManager()
 HRESULT stageManager::init()
 {
 	// 추가하는 함수. 나중에 배치할떄 쓰고 지금은 지워도 됨
-	createChair(400, 400);
+	createChair(400, CAMY + 400);
 
 	return S_OK;
 }

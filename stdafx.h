@@ -55,9 +55,9 @@ using namespace TFIVE_UTIL;
 #define CAMERAMANAGER cameraManager::getSingleton()
 #define CAMX cameraManager::getSingleton()->getCameraX()
 #define CAMY cameraManager::getSingleton()->getCameraY()
-#define MAPSIZEX 1440 // 맵크기 정해지면 그 때 바꾸러 와야함
-#define MAPSIZEY 2096
-
+#define FINDIMG imageManager::getSingleton()->findImage // 너무 길어서 편하게 하려고 추가한거
+#define MAPSIZEX 4848 // 맵크기 정해지면 그 때 바꾸러 와야함
+#define MAPSIZEY 2304
 
 #define SAFE_DELETE(p) {if(p) {delete(p); (p)=NULL;}}
 #define SAFE_RELEASE(p) {if(p) {(p)->release(); (p)=NULL;}}

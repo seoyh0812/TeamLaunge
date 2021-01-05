@@ -12,7 +12,8 @@ mainScene::~mainScene()
 HRESULT mainScene::init()
 {
 	CAMERAMANAGER->setCameraX(0);
-	CAMERAMANAGER->setCameraY(0);
+	_loopX = _loopY = 0;
+	CAMERAMANAGER->setCameraY(MAPSIZEY-WINSIZEY);
 	_pl = new player;		_pl->init();
 	_em = new enemyManager;	_em->init();
 	_sm = new stageManager; _sm->init();
@@ -43,14 +44,18 @@ void mainScene::update()
 	_sm->update();
 	_im->update();
 	_cl->update();
+	cameraControl();
 }
 
 void mainScene::render()
 {
-
+	//FINDIMG("맵")->render(getMemDC()); //이렇게쓰면 렉 개심함(주석풀고 해보려면 해보고)
+	if (CAMY < 700) FINDIMG("창문배경")->loopRender(getMemDC(), &_loopRc, _loopX, _loopY);
+	FINDIMG("맵")->render(getMemDC(), CAMX, CAMY,CAMX,CAMY,WINSIZEX,WINSIZEY); // 특정부분만 갖고오기
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		TIMEMANAGER->render(getMemDC());
+		FINDIMG("맵픽셀")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY);
+		TIMEMANAGER->render(getMemDC(),CAMX,CAMY);
 	}
 	_pl->render();
 	_em->render();
@@ -59,5 +64,6 @@ void mainScene::render()
 	_cl->render();
 
 	zOrderRender();
+	if (CAMX > 2060-WINSIZEX && CAMX < 2133)FINDIMG("기둥")->render(getMemDC(), 2060, 1536);
 	
 }

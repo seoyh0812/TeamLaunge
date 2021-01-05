@@ -79,6 +79,9 @@
     <Filter Include="playGround\stage\subclass">
       <UniqueIdentifier>{8f7f957c-d6f7-4725-bb87-07928fe2720b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\scene\mainScene">
+      <UniqueIdentifier>{0380463a-eeff-47c4-aa80-20daee59a0f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -177,9 +180,6 @@
     <ClInclude Include="run.h">
       <Filter>playGround\player\STATE</Filter>
     </ClInclude>
-    <ClInclude Include="mainScene.h">
-      <Filter>playGround\scene</Filter>
-    </ClInclude>
     <ClInclude Include="boss.h">
       <Filter>playGround\enemy\subclass</Filter>
     </ClInclude>
@@ -224,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="trashCan.h">
       <Filter>playGround\stage\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="mainScene.h">
+      <Filter>playGround\scene\mainScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +311,6 @@
     <ClCompile Include="run.cpp">
       <Filter>playGround\player\STATE</Filter>
     </ClCompile>
-    <ClCompile Include="mainScene.cpp">
-      <Filter>playGround\scene</Filter>
-    </ClCompile>
     <ClCompile Include="boss.cpp">
       <Filter>playGround\enemy\subclass</Filter>
     </ClCompile>
@@ -375,7 +375,13 @@
       <Filter>playGround</Filter>
     </ClCompile>
     <ClCompile Include="mainScene+zOrderRender.cpp">
-      <Filter>playGround\scene</Filter>
+      <Filter>playGround\scene\mainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="mainScene.cpp">
+      <Filter>playGround\scene\mainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="mainScene+cameraControl.cpp">
+      <Filter>playGround\scene\mainScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
