@@ -2,10 +2,12 @@
 #include "mainScene.h"
 #include "endingScene.h"
 #include "titleScene.h"
+#include "videoScene.h"
 
 class playGround : public gameNode
 {
 private:
+	bool _videoPlaying;
 
 public:
 	playGround();

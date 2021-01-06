@@ -193,6 +193,7 @@
     <ClInclude Include="trashCan.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="videoScene.h" />
     <ClInclude Include="walk.h" />
     <ClInclude Include="windowAPI.h" />
   </ItemGroup>
@@ -251,6 +252,7 @@
     <ClCompile Include="trashCan.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="videoScene.cpp" />
     <ClCompile Include="walk.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>

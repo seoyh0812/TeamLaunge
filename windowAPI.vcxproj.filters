@@ -228,6 +228,9 @@
     <ClInclude Include="mainScene.h">
       <Filter>playGround\scene\mainScene</Filter>
     </ClInclude>
+    <ClInclude Include="videoScene.h">
+      <Filter>playGround\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -382,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="mainScene+cameraControl.cpp">
       <Filter>playGround\scene\mainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="videoScene.cpp">
+      <Filter>playGround\scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
