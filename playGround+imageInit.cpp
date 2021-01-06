@@ -5,8 +5,8 @@
 
 void playGround::imageInit()
 {
+	// ¸Ê°ü·Ã
 	IMAGEMANAGER->addImage("¸Ê", "image/AllStage_front.bmp", 4848, 2304, true, RGB(255,0,255));
-	IMAGEMANAGER->addImage("¸ÊÇÈ¼¿", "image/AllStage_PoxelClsn.bmp", 4848, 2304, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("Ã¢¹®¹è°æ", "image/ui/airstageback.bmp", 1024, 704, false, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("±âµÕ", "image/ui/column.bmp", 77, 769, false, RGB(255, 0, 255));
 }

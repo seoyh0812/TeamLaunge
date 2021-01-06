@@ -13,6 +13,7 @@ HRESULT mainScene::init()
 {
 	CAMERAMANAGER->setCameraX(0);
 	_loopX = _loopY = 0;
+	_mapChanging = false;
 	CAMERAMANAGER->setCameraY(MAPSIZEY-WINSIZEY);
 	_pl = new player;		_pl->init();
 	_em = new enemyManager;	_em->init();
@@ -54,7 +55,6 @@ void mainScene::render()
 	FINDIMG("¸Ê")->render(getMemDC(), CAMX, CAMY,CAMX,CAMY,WINSIZEX,WINSIZEY); // Æ¯Á¤ºÎºĞ¸¸ °®°í¿À±â
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		FINDIMG("¸ÊÇÈ¼¿")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY);
 		TIMEMANAGER->render(getMemDC(),CAMX,CAMY);
 	}
 	_pl->render();
