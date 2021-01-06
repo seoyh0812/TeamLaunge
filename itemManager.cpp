@@ -29,11 +29,7 @@ void itemManager::update()
 }
 
 void itemManager::render()
-{
-	for (int i = 0; i < _vItem.size(); ++i)
-	{
-		_vItem[i]->render();
-	}
+{ // 아이템들은 제트오더에서 한번에 그릴거임
 }
 
 void itemManager::createBaseball(float x, float y)

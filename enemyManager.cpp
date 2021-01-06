@@ -34,11 +34,7 @@ void enemyManager::update()
 }
 
 void enemyManager::render()
-{
-	for (int i = 0; i < _vEnemy.size(); ++i)
-	{
-		_vEnemy[i]->render();
-	}
+{ // 적들은 제트오더에서 한번에 그릴거임
 }
 
 void enemyManager::createMinion(float x, float y)

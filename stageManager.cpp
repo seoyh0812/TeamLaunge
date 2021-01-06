@@ -31,11 +31,7 @@ void stageManager::update()
 }
 
 void stageManager::render()
-{
-	for (int i = 0; i < _vObject.size(); ++i)
-	{
-		_vObject[i]->render();
-	}
+{ // 오브젝트 벡터들은 제트오더에서 한번에 그릴거임
 }
 
 void stageManager::createChair(float x, float y)

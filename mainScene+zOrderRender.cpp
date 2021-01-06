@@ -25,11 +25,11 @@ void mainScene::zOrderRender()
 	// y값을 하나하나 넣었음
 
 	sprintf_s(_str, "정렬전:");
-	TextOut(getMemDC(), 440, 0, _str, strlen(_str));
+	TextOut(getMemDC(), CAMX+340, CAMY, _str, strlen(_str));
 	for (int i = 0; i < bottomY.size(); ++i)
 	{
 		sprintf_s(_str, "%d", bottomY[i]);
-		TextOut(getMemDC(), 500 + i * 30, 0, _str, strlen(_str));
+		TextOut(getMemDC(), CAMX + 400 + i * 40, CAMY, _str, strlen(_str));
 	} // 텍스트는 이해를 돕기위해 참고용으로 넣어봤어. 나중에 없앨거
 
 
@@ -44,11 +44,11 @@ void mainScene::zOrderRender()
 	// 뒤의것이 앞의것보다 작다면 swap(위치바꿈)을 반복하는 반복문이라 보면 돼
 
 	sprintf_s(_str, "정렬후:");
-	TextOut(getMemDC(), 440, 20, _str, strlen(_str));
+	TextOut(getMemDC(), CAMX+340, CAMY+20, _str, strlen(_str));
 	for (int i = 0; i < bottomY.size(); ++i)
 	{
 		sprintf_s(_str, "%d", bottomY[i]);
-		TextOut(getMemDC(), 500 + i * 30, 20, _str, strlen(_str));
+		TextOut(getMemDC(), CAMX + 400 + i * 40, CAMY+20, _str, strlen(_str));
 	} // 텍스트는 이해를 돕기위해 참고용으로 넣어봤어. 나중에 없앨거
 
 	for (int i = 0; i < bottomY.size(); ++i)
