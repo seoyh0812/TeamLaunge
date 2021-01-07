@@ -22,9 +22,25 @@ void itemManager::release()
 
 void itemManager::update()
 {
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	{//실험용 
+		_vItem.clear();
+		createBaseball(300, CAMY + 500);
+	}
+
 	for (int i = 0; i < _vItem.size(); ++i)
 	{
 		_vItem[i]->update();
+	}
+
+	for (int i = 0; i < _vItem.size(); i++)
+	{//아이템이 화면 밖으로 나가면 없어지도록.
+		if (_vItem[i]->getRect().right < CAMERAMANAGER->getCameraX() ||
+			_vItem[i]->getRect().left > CAMERAMANAGER->getCameraX() + WINSIZEX)
+		{
+			_vItem.erase(_vItem.begin() + i);
+			break;
+		}
 	}
 }
 

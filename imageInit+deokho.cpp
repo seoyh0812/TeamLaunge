@@ -5,6 +5,7 @@
 
 void playGround::imageInitDeokho()
 {
-	//이거는 예시. yoongho에 해놨으니 지워도 됨.
-	//IMAGEMANAGER->addImage("맵", "image/AllStage_front.bmp", 4848, 2304, true, RGB(255,0,255));	
+	IMAGEMANAGER->addImage("공", "image/item_bmp/ball_basic.bmp", 47, 45, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("찌그러진공", "image/item_bmp/ball_strach.bmp", 98, 33, true, RGB(255, 0, 255));
+
 }
