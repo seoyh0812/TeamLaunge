@@ -34,7 +34,7 @@ void walk::updateState()
 	{
 		_pl->getFlyY() += 3;	_pl->getGroundY() += 3;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_SPACE))
+	if (KEYMANAGER->isStayKeyDown('X'))
 	{
 		_pl->setState(JUMP);
 	}

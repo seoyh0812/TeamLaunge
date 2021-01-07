@@ -35,7 +35,7 @@ void run::updateState()
 	{
 		_pl->getFlyY() += 8;	_pl->getGroundY() += 8;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_SPACE))
+	if (KEYMANAGER->isStayKeyDown('X'))
 	{
 		_pl->setState(JUMP);
 	}

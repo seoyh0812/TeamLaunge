@@ -61,7 +61,13 @@ void Idle::updateState()
 			_pl->setState(RUN);
 		}
 	}
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+
+	if (KEYMANAGER->isOnceKeyDown('Z'))
+	{
+		_pl->setState(COMBO1);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('X'))
 	{
 		_pl->setState(JUMP);
 	}
