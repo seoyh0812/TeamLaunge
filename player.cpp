@@ -28,6 +28,7 @@ HRESULT player::init()
 	_currentHP = _maxHP = 100.f;
 	_left = false;
 	setState(IDLE);
+	_attack = new attack;
 	_attack->init(3, 50);
 	//setState(IDLE);
 	_em = new enemyManager;
