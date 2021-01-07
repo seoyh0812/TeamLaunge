@@ -1,6 +1,9 @@
 #pragma once
 #include "gameNode.h"
 
+
+class enemyManager;
+
 class STATE; // 상호참조시 전방선언 같은거
 
 enum State {
@@ -31,6 +34,8 @@ private:
 	int _dirMemory;				// 방향 기억(대쉬용)
 	int _dirMemoryCount;		// 카운트체크해서 내림
 
+	enemyManager* _em;
+
 public:
 	player();
 	~player();
@@ -57,5 +62,6 @@ public:
 	State& getEnumState() { return _enumState; }
 	void plusDirectionChanged() { ++_directionChanged; }
 	int& getDirMemory() {return _dirMemory;}
+	void setLinkEnemy(enemyManager* em) { _em = em; }
 };
 

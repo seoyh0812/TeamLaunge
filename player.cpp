@@ -5,6 +5,7 @@
 #include "Jump.h"
 #include "walk.h"
 #include "run.h"
+#include "enemyManager.h"
 // 왜 헤더가 아니냐면 상호참조(상속받고) 날수 있기 때문이라고 함
 // 추가할떈 잊지말고 여기에다 추가
 
@@ -27,6 +28,7 @@ HRESULT player::init()
 	_left = false;
 	setState(IDLE);
 	//setState(IDLE);
+	_em = new enemyManager;
 	return S_OK;
 }
 
