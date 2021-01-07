@@ -5,6 +5,8 @@ class trashCan :public object
 {
 private:
 
+	image* _TrashCanImg;
+
 public:
 	trashCan();
 	~trashCan();

@@ -4,6 +4,8 @@ class chair :public object
 {
 private:
 
+	image* _ChairImg;
+
 public:
 	chair();
 	~chair();

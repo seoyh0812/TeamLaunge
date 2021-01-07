@@ -11,6 +11,9 @@ trashCan::~trashCan()
 
 HRESULT trashCan::init(float x, float y)
 {
+	_x = x; _y = y;
+	_rc = RectMakeCenter(_x, _y, 110, 150);
+	_TrashCanImg = IMAGEMANAGER->findImage("쓰레기통");
 	return S_OK;
 }
 
@@ -24,4 +27,7 @@ void trashCan::update()
 
 void trashCan::render()
 {
+//	Rectangle(getMemDC(), _rc);
+	_TrashCanImg->render(getMemDC(), _rc.left,  _rc.top);
+	TextOut(getMemDC(), _rc.left, _rc.top, "쓰레기통", strlen("쓰레기통"));
 }

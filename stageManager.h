@@ -6,8 +6,8 @@
 class stageManager : public gameNode
 {
 private:
-	vector<object*> _vObject;
-	vector<object*>::iterator _viObject;
+	vector<object*> _VObject;
+	vector<object*>::iterator _ViObject;
 	// (중요함) 벡터에는 에너미로써(부모클래스) 넣는거야
 	// 따라서 subclass만의 고유한 함수를 만들어 이용하고 싶다면
 	// [ex) (다른클래스에서) getVObject()[i]->고유함수();]
@@ -26,8 +26,9 @@ public:
 	virtual void render();
 
 	void createChair(float x, float y);
+	void createTrashCan(float x, float y);
 
-	vector<object*> getVObject() { return _vObject; }
-	vector<object*>::iterator getViObject() { return _viObject; }
+	vector<object*> getVObject() { return _VObject; }
+	vector<object*>::iterator getViObject() { return _ViObject; }
 };
 
