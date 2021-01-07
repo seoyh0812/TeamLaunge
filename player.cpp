@@ -5,6 +5,7 @@
 #include "Jump.h"
 #include "walk.h"
 #include "run.h"
+#include "combo1.h"
 #include "enemyManager.h"
 // 왜 헤더가 아니냐면 상호참조(상속받고) 날수 있기 때문이라고 함
 // 추가할떈 잊지말고 여기에다 추가
@@ -27,6 +28,7 @@ HRESULT player::init()
 	_currentHP = _maxHP = 100.f;
 	_left = false;
 	setState(IDLE);
+	_attack->init(3, 50);
 	//setState(IDLE);
 	_em = new enemyManager;
 	return S_OK;
@@ -42,6 +44,7 @@ void player::update()
 	_flyRc = RectMakeCenter(_flyX, _flyY, 50, 50);
 	_groundRc = RectMakeCenter(_groundX, _groundY, 50, 50);	
 	minusDirectionChanged();
+	_attack->update(50);
 }
 
 void player::render()
@@ -62,6 +65,7 @@ void player::render()
 		sprintf_s(_str, "이때 버튼을 누르면 특수기로 나가도록 설정");
 		TextOut(getMemDC(), 0, 80, _str, strlen(_str));
 	}
+	_attack->render();
 }
 
 void player::minusDirectionChanged()
@@ -107,6 +111,7 @@ void player::setState(State state)
 	case JUMP:	_statePattern = new Jump;	break;
 	case WALK:	_statePattern = new walk;	break;
 	case RUN:	_statePattern = new run;	break;
+	case COMBO1: _statePattern = new combo1; break;
 	}
 	_statePattern->LinkMemberAdress(this);
 	// 참조할때마다 플레이그라운드에서 링크시켰던거 있잖아?

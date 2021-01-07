@@ -23,7 +23,7 @@
     <ProjectGuid>{19D559FB-F5D0-4C3C-9B48-720C72E962E0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>windowAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="animation.h" />
+    <ClInclude Include="attack.h" />
     <ClInclude Include="baseball.h" />
     <ClInclude Include="bat.h" />
     <ClInclude Include="boss.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="chair.h" />
     <ClInclude Include="collision.h" />
+    <ClInclude Include="combo1.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
@@ -199,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="attack.cpp" />
     <ClCompile Include="baseball.cpp" />
     <ClCompile Include="bat.cpp" />
     <ClCompile Include="boss.cpp" />
@@ -211,6 +214,7 @@
     <ClCompile Include="collision+yoongho.cpp" />
     <ClCompile Include="collision+younghan.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="combo1.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="endingScene.cpp" />

@@ -231,6 +231,12 @@
     <ClInclude Include="videoScene.h">
       <Filter>playGround\scene</Filter>
     </ClInclude>
+    <ClInclude Include="combo1.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="attack.h">
+      <Filter>playGround\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -400,6 +406,12 @@
     </ClCompile>
     <ClCompile Include="mainScene+renderFunctions.cpp">
       <Filter>playGround\scene\mainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="combo1.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="attack.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

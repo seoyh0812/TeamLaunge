@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "attack.h"
 
 
 class enemyManager;
@@ -10,7 +11,8 @@ enum State {
 	IDLE,
 	JUMP,
 	WALK,
-	RUN
+	RUN,
+	COMBO1
 };
 
 class player :
@@ -27,6 +29,7 @@ private:
 	char _str[128];
 	float _currentHP;
 	float _maxHP;
+	attack* _attack;
 
 	// ############ 커맨드 입력 관련 변수(대시, 특수기) #############
 	int _directionChanged;		// 좌우가 몇번 바뀌었는지 카운트(커맨드)
@@ -63,5 +66,6 @@ public:
 	void plusDirectionChanged() { ++_directionChanged; }
 	int& getDirMemory() {return _dirMemory;}
 	void setLinkEnemy(enemyManager* em) { _em = em; }
+	attack* getAttack() { return _attack; }
 };
 
