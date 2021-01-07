@@ -20,6 +20,8 @@ private:
 	char _str[128];
 	RECT _loopRc;  int _loopX;	int _loopY; int _loopCount; // 뒷배경 루프렌더용
 	bool _mapChanging; // 맵이 바뀌는 중인지(위로 올라가는 효과)
+	int _timeLimit; int _timeCount; // 제한시간
+	int _life;
 
 public:
 	mainScene();
@@ -32,5 +34,6 @@ public:
 
 	void zOrderRender();
 	void cameraControl();
+	void uiRender();
 };
 

@@ -231,7 +231,7 @@
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="mainScene+cameraControl.cpp" />
-    <ClCompile Include="mainScene+zOrderRender.cpp" />
+    <ClCompile Include="mainScene+renderFunctions.cpp" />
     <ClCompile Include="minion.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="player.cpp" />

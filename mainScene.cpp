@@ -12,7 +12,8 @@ mainScene::~mainScene()
 HRESULT mainScene::init()
 {
 	CAMERAMANAGER->setCameraX(0);
-	_loopX = 0;	_loopY = 300; _loopCount = 0;
+	_loopX = 0;	_loopY = 300; _loopCount = _timeCount = 0;
+	_timeLimit = 99; _life = 3;
 	_mapChanging = false;
 	CAMERAMANAGER->setCameraY(MAPSIZEY-WINSIZEY);
 	_pl = new player;		_pl->init();
@@ -25,6 +26,8 @@ HRESULT mainScene::init()
 	_cl->setEmMemoryAddressLink(_em);
 	_cl->setSmMemoryAddressLink(_sm);
 	_cl->setImMemoryAddressLink(_im);
+	_pl->setLinkEnemy(_em);
+	_em->setLinkPlayer(_pl);
 
 	return S_OK;
 }
@@ -46,6 +49,12 @@ void mainScene::update()
 	_im->update();
 	_cl->update();
 	cameraControl();
+	if (_timeCount < 120) ++_timeCount;
+	else
+	{
+		_timeCount = 0;
+		--_timeLimit;
+	}
 }
 
 void mainScene::render()
@@ -62,5 +71,5 @@ void mainScene::render()
 
 	zOrderRender();
 	if (CAMX > 2060-WINSIZEX && CAMX < 2133)FINDIMG("기둥")->render(getMemDC(), 2060, 1536);
-	
+	uiRender(); // 길어질거같아서 따로 뺴다씀
 }

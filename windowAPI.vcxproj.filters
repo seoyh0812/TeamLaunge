@@ -374,9 +374,6 @@
     <ClCompile Include="trashCan.cpp">
       <Filter>playGround\stage\subclass</Filter>
     </ClCompile>
-    <ClCompile Include="mainScene+zOrderRender.cpp">
-      <Filter>playGround\scene\mainScene</Filter>
-    </ClCompile>
     <ClCompile Include="mainScene.cpp">
       <Filter>playGround\scene\mainScene</Filter>
     </ClCompile>
@@ -400,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="imageInit+yoongho.cpp">
       <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="mainScene+renderFunctions.cpp">
+      <Filter>playGround\scene\mainScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
