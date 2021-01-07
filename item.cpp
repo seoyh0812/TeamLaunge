@@ -38,3 +38,11 @@ void item::fillColorEllipse(int R, int G, int B, RECT rc)
 	SelectObject(getMemDC(), oldpen);
 	DeleteObject(pen);
 }
+
+void item::attackMove(bool direction)
+{
+}
+
+void item::setHold(bool holding, float x, float y)
+{
+}
