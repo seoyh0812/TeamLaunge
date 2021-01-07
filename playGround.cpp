@@ -15,7 +15,7 @@ HRESULT playGround::init()
 {
 	gameNode::init(true);
 	srand(time(NULL));
-	imageInit();
+	imageInitChanho(); imageInitDeokho(); imageInitHyunjeong(); imageInitYoongho(); imageInitYounghan();
 	SCENEMANAGER->addScene("¸ÞÀÎ¾À", new mainScene);
 	SCENEMANAGER->addScene("Å¸ÀÌÆ²¾À", new titleScene);
 	SCENEMANAGER->addScene("¿£µù¾À", new endingScene);

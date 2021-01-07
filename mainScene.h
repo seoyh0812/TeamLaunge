@@ -18,7 +18,7 @@ private:
 
 	vector<int> bottomY;
 	char _str[128];
-	RECT _loopRc;  int _loopX;	int _loopY; // 뒷배경 루프렌더용
+	RECT _loopRc;  int _loopX;	int _loopY; int _loopCount; // 뒷배경 루프렌더용
 	bool _mapChanging; // 맵이 바뀌는 중인지(위로 올라가는 효과)
 
 public:

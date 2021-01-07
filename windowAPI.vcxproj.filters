@@ -374,9 +374,6 @@
     <ClCompile Include="trashCan.cpp">
       <Filter>playGround\stage\subclass</Filter>
     </ClCompile>
-    <ClCompile Include="playGround+imageInit.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
     <ClCompile Include="mainScene+zOrderRender.cpp">
       <Filter>playGround\scene\mainScene</Filter>
     </ClCompile>
@@ -388,6 +385,21 @@
     </ClCompile>
     <ClCompile Include="videoScene.cpp">
       <Filter>playGround\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="imageInit+chanho.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="imageInit+deokho.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="imageInit+hyunjeong.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="imageInit+younghan.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="imageInit+yoongho.cpp">
+      <Filter>playGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

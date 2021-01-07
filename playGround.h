@@ -18,6 +18,10 @@ public:
 	virtual void update();	//연산 전용
 	virtual void render();	//그리기 전용
 
-	void imageInit();
+	void imageInitChanho();
+	void imageInitDeokho();
+	void imageInitHyunjeong();
+	void imageInitYoongho();
+	void imageInitYounghan();
 };
 

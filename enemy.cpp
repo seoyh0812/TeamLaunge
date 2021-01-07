@@ -20,7 +20,6 @@ void enemy::release()
 
 void enemy::update()
 {
-	
 }
 
 void enemy::render()

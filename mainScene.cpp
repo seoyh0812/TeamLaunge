@@ -12,7 +12,7 @@ mainScene::~mainScene()
 HRESULT mainScene::init()
 {
 	CAMERAMANAGER->setCameraX(0);
-	_loopX = _loopY = 0;
+	_loopX = 0;	_loopY = 300; _loopCount = 0;
 	_mapChanging = false;
 	CAMERAMANAGER->setCameraY(MAPSIZEY-WINSIZEY);
 	_pl = new player;		_pl->init();
