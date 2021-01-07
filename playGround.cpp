@@ -21,8 +21,10 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("¿£µù¾À", new endingScene);
 	SCENEMANAGER->addScene("ºñµğ¿À¾À", new videoScene);
 
-	SCENEMANAGER->changeScene("ºñµğ¿À¾À");
-	_videoPlaying = true;
+	//SCENEMANAGER->changeScene("ºñµğ¿À¾À");
+	//_videoPlaying = true;
+	SCENEMANAGER->changeScene("Å¸ÀÌÆ²¾À");
+	_videoPlaying = false;
 	
 	return S_OK;
 }
@@ -39,10 +41,13 @@ void playGround::update()
 {
 	gameNode::update();
 
-	if (KEYMANAGER->isStayKeyDown(VK_RETURN) && _videoPlaying)
+	if (_videoPlaying)
 	{
-		_videoPlaying = false;
-		SCENEMANAGER->changeScene("¸ŞÀÎ¾À");
+		if (KEYMANAGER->isStayKeyDown(VK_RETURN))
+		{
+			_videoPlaying = false;
+			SCENEMANAGER->changeScene("Å¸ÀÌÆ²¾À");
+		}
 	}
 
 	SCENEMANAGER->update();	

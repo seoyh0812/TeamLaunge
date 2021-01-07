@@ -5,8 +5,11 @@
 
 void playGround::imageInitYoongho()
 {
-	// ¸Ê°ü·Ã
 	IMAGEMANAGER->addImage("¸Ê", "image/AllStage_front.bmp", 4848, 2304, true, RGB(255,0,255));
 	IMAGEMANAGER->addImage("Ã¢¹®¹è°æ", "image/ui/airstageback.bmp", 1024, 704, false, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("±âµÕ", "image/ui/column.bmp", 77, 769, false, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("¼¿·º¹è°æ", "image/ui/selectbackground.bmp", 957, 674, false, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¼¿·ºÄ¿¼­", "image/ui/selectcursor.bmp", 96, 96, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("¼¿·ºÄ³¸¯", "image/ui/selectcharacter.bmp", 1024, 768, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¼¿·º·¹µå", "image/ui/selectred.bmp", 480, 404, 2, 1, true, RGB(255, 0, 255));
 }
