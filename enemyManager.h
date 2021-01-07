@@ -3,6 +3,14 @@
 #include <vector>
 #include "boss.h"
 #include "minion.h"
+
+class player;
+
+enum createEnemy
+{
+	WAIT, END
+};
+
 class enemyManager :	public gameNode
 {
 private:
@@ -16,6 +24,9 @@ private:
 	// 그럴떈 enemy.h에서 " 고유한 함수() = 0; " 요런식으로 껍데기 함수를 마련할수 있어.
 	// 그러면 enemy에 그 함수가 있으니 에러는 안나지만 enemy의 함수가 아닌 상속클래스로 잘 연산하게 돼
 
+	int _wave;
+	createEnemy _create;
+	player* _pl;
 public:
 	enemyManager();
 	~enemyManager();
@@ -27,8 +38,11 @@ public:
 
 	void createMinion(float x, float y);
 	void createBoss(float x, float y);
+	void enemyAi();
 
 	vector<enemy*> getVEnemy() { return _vEnemy; }
 	vector<enemy*>::iterator getViEnemy() { return _viEnemy; }
+
+	void setLinkPlayer(player* player) { _pl = player; }
 };
 
