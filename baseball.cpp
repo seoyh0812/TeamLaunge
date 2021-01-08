@@ -62,6 +62,17 @@ void baseball::update()
 	
 	if (_strach)_time -= TIMEMANAGER->getElapsedTime();
 	if (_time < 0)_strach = false;
+	if (_pickup)
+	{
+		_xg = _x;//¶¥·ºÆ®
+		_yg = _y + 30;
+		_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//¶¥·ºÆ®
+	}
+	if (_moving)
+	{
+		_xg = _x;//¶¥·ºÆ®
+		_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//¶¥·ºÆ®
+	}
 }
 
 void baseball::render()

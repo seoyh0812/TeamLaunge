@@ -66,3 +66,4 @@ void item::attackMove(bool direction)
 void item::setHold(float x, float y)
 {
 }
+

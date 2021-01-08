@@ -22,6 +22,7 @@ void itemManager::release()
 
 void itemManager::update()
 {
+	
 	{
 		if (KEYMANAGER->isOnceKeyDown('1'))
 		{//»ç¿ë¹ý ´À³¦¾²
@@ -35,7 +36,9 @@ void itemManager::update()
 			_vItem.clear();
 			createBomb(500, CAMY + 500);
 		}
-
+	}
+	/*
+	{
 		if (KEYMANAGER->isOnceKeyDown('Q'))
 		{
 			for (int i = 0; i < _vItem.size(); i++)
@@ -69,7 +72,20 @@ void itemManager::update()
 	}
 	
 	}
-
+	*/
+	
+	if (itemAttack)
+	{
+		for (int i = 0; i < _vItem.size(); i++)
+		{
+			_vItem[i]->attackMove(_direction);
+			if (_vItem[i]->getDelete())
+			{
+				EFFECTMANAGER->play("Æø¹ß", ((_vItem[i]->getRect().right + _vItem[i]->getRect().left) / 2), _vItem[i]->getRect().top);
+				_vItem.erase(_vItem.begin() + i);
+			}
+		}
+	}
 	for (int i = 0; i < _vItem.size(); ++i)
 	{
 		_vItem[i]->update();
@@ -109,4 +125,15 @@ void itemManager::createBomb(float x, float y)
 	vbomb->init(x, y);
 	itemAttack = false;
 	_vItem.push_back(vbomb);
+}
+
+void itemManager::throwing()
+{
+	itemAttack = true;
+}
+
+void itemManager::throwing(bool direction)
+{
+	itemAttack = true;
+	_direction = direction;
 }

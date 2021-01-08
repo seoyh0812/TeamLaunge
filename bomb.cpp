@@ -49,7 +49,17 @@ void bomb::update()
 	_shadow = RectMakeCenter(_xg, _rcg.bottom, shadowWidth, shadowHeight);
 	
 	_indexTime += TIMEMANAGER->getElapsedTime();
-
+	if (_pickup)
+	{
+		_xg = _x;//¶¥·ºÆ®
+		_yg = _y + 30;
+		_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//¶¥·ºÆ®
+	}
+	if (_moving)
+	{
+		_xg = _x;//¶¥·ºÆ®
+		_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//¶¥·ºÆ®
+	}
 }
 
 void bomb::render()
