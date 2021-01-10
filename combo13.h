@@ -1,10 +1,11 @@
 #pragma once
 #include "STATE.h"
 
-//이후 콤보 1-1 혹은 2-1로 분화하는 아주 매우 많이 기본공격입니다.
+
+//콤보 1-3(이동방향을 설정하지 않은 콤보)입니다.
 class player;
 
-class combo1 : public STATE
+class combo13 : public STATE
 {
 private:
 public:

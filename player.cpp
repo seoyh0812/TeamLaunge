@@ -6,6 +6,9 @@
 #include "walk.h"
 #include "run.h"
 #include "combo1.h"
+#include "combo11.h"
+#include "combo12.h"
+#include "combo13.h"
 #include "enemyManager.h"
 // 왜 헤더가 아니냐면 상호참조(상속받고) 날수 있기 때문이라고 함
 // 추가할떈 잊지말고 여기에다 추가
@@ -114,6 +117,9 @@ void player::setState(State state)
 	case WALK:	_statePattern = new walk;	break;
 	case RUN:	_statePattern = new run;	break;
 	case COMBO1: _statePattern = new combo1; break;
+	case COMBO11: _statePattern = new combo11; break;
+	case COMBO12: _statePattern = new combo12; break;
+	case COMBO13: _statePattern = new combo13; break;
 	}
 	_statePattern->LinkMemberAdress(this);
 	// 참조할때마다 플레이그라운드에서 링크시켰던거 있잖아?
@@ -184,14 +190,65 @@ void player::stateUpdate()
 			playerImage = IMAGEMANAGER->findImage("플레이어공격");
 			if (!_left)
 			{
-				if (_index >= 3) setState(IDLE);
+				if (_index >= 9) setState(IDLE);
 				playerImage->setFrameY(0);
 				playerImage->setFrameX(_index);
 				_index++;
 			}
 			else
 			{
-				if (_index >= 3) setState(IDLE);
+				if (_index >= 9) setState(IDLE);
+				playerImage->setFrameY(1);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			break;
+		case COMBO11:
+			playerImage = IMAGEMANAGER->findImage("플레이어공격1-1");
+			if (!_left)
+			{
+				if (_index >= 6) setState(IDLE);
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			else
+			{
+				if (_index >= 6) setState(IDLE);
+				playerImage->setFrameY(1);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			break;
+		case COMBO12:
+			playerImage = IMAGEMANAGER->findImage("플레이어공격1-2");
+			if (!_left)
+			{
+				if (_index >= 6) setState(IDLE);
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			else
+			{
+				if (_index >= 6) setState(IDLE);
+				playerImage->setFrameY(1);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			break;
+		case COMBO13:
+			playerImage = IMAGEMANAGER->findImage("플레이어공격1-3");
+			if (!_left)
+			{
+				if (_index >= 6) setState(IDLE);
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			else
+			{
+				if (_index >= 6) setState(IDLE);
 				playerImage->setFrameY(1);
 				playerImage->setFrameX(_index);
 				_index++;
@@ -230,6 +287,18 @@ void player::stateRender()
 	case COMBO1:
 		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
 		else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top);
+		break;
+	case COMBO11:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
+		break;
+	case COMBO12:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top - 40);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top - 40);
+		break;
+	case COMBO13:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top);
 		break;
 	
 	}

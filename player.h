@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "attack.h"
 
+class attack;
 
 class enemyManager;
 
@@ -12,7 +13,10 @@ enum State {
 	JUMP,
 	WALK,
 	RUN,
-	COMBO1
+	COMBO1,
+	COMBO11,
+	COMBO12,
+	COMBO13
 };
 
 class player :
@@ -71,5 +75,6 @@ public:
 	int& getDirMemory() {return _dirMemory;}
 	void setLinkEnemy(enemyManager* em) { _em = em; }
 	attack* getAttack() { return _attack; }
+	int& getIndex() { return _index; }
 };
 
