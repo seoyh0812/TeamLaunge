@@ -1,14 +1,13 @@
 #pragma once
 #include "enemy.h"
 
-// 클래스명 맘에 안들면 없애도 됨. 그저 예시일 뿐이니까..
-class minion :	public enemy
+class minion2 : public enemy
 {
 private:
-	int _plAtkNum;				//테스트용 플레이어 공격상태
+
 public:
-	minion();
-	~minion();
+	minion2();
+	~minion2();
 
 	virtual HRESULT init(float x, float y);
 	virtual void release();
@@ -19,3 +18,4 @@ public:
 	void enemyStateRender();		//가독성을 위해 렌더함수로 따로 관리함
 	void keyManager();				//그냥 나 편하려고만든 테스트용
 };
+

@@ -122,16 +122,27 @@ void minion::enemyState()
 		break;
 
 	case E_FLYING:
-		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 준다
-		if (_rc.right > CAMX + WINSIZEX && _flying)
+		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
+		if (_rc.right > CAMX + WINSIZEX && _flying && _left)
 		{
 			_flying = false;
 			_index = 1;
+			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
+			_x -= 5;
+		}
+		//몬스터 렉트의 레프트가 카메라 화면 왼쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
+		if (_rc.left < CAMX && _flying && !_left)
+		{
+			_flying = false;
+			_index = 1;
+			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
+			_x += 5;
 		}
 		//인덱스가 정상적으로 초기화되었고 지상에있는 상태라면 플라잉상태로 변경시켜줌
 		//그리고 플라잉 상태에서만 좌표를 이동시키며 아직 좀 더 상세하게 수정이 필요함
 		if (!_flying && _index == 0) _flying = true;
-		if (_flying) _x += 2.7f;
+		if (_flying && _left) _x += 15.5f;
+		if (_flying && !_left) _x -= 15.5f;
 		
 		
 		if (_index > 3)
@@ -228,5 +239,5 @@ void minion::render()
 	
 	
 	//테스트용, 파일 합치기전엔 항상 주석처리할것
-	keyManager();
+	//keyManager();
 }

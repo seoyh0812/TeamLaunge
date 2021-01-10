@@ -21,6 +21,8 @@ protected:
 	bool _flying; // 날고있으면 1, 지상이면 0
 
 	enemyState _state;
+	enemyState _state2;
+	enemyState _state3;
 	bossState _bState;
 public:
 	enemy();
