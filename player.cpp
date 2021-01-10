@@ -17,7 +17,7 @@ HRESULT player::init()
 	_flyX = _groundX = 100.f;
 	_flyY = _groundY = CAMY + 300.f;
 	_directionChanged = _directionChangeCount = _dirMemory = _dirMemoryCount = 0;
-	_flyRc = RectMakeCenter(_flyX, _flyY, 50, 50);
+	_flyRc = RectMakeCenter(_flyX, _flyY, playerImage->getFrameWidth() / 4, playerImage->getFrameHeight());
 	_groundRc = RectMakeCenter(_groundX, _groundY, 20, 20);
 	_currentHP = _maxHP = 100.f;
 	_left = false;
@@ -37,7 +37,7 @@ void player::update()
 {
 	_statePattern->updateState();
 	stateUpdate();
-	_flyRc = RectMakeCenter(_flyX, _flyY, 50, 50);
+	_flyRc = RectMakeCenter(_flyX, _flyY, playerImage->getFrameWidth() / 4, playerImage->getFrameHeight());
 	_groundRc = RectMakeCenter(_groundX, _groundY, 50, 50);	
 	minusDirectionChanged();
 	_attack->update(50);
@@ -212,24 +212,24 @@ void player::stateRender()
 	switch (_enumState)
 	{
 	case IDLE:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 125, _flyRc.top - 180);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 180);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
 		break;
 	case JUMP:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 200);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 200);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 86, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 86, _flyRc.top);
 		break;
 	case WALK:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 200);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 200);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top);
 		break;
 	case RUN:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 200);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 200);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 40, _flyRc.top);
 		break;
 	case COMBO1:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 200);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 200);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top);
 		break;
 	
 	}
