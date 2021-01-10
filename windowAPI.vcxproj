@@ -23,7 +23,7 @@
     <ProjectGuid>{19D559FB-F5D0-4C3C-9B48-720C72E962E0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>windowAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -176,6 +176,8 @@
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="minion.h" />
+    <ClInclude Include="minion2.h" />
+    <ClInclude Include="minion3.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="pizza.h" />
     <ClInclude Include="player.h" />
@@ -242,6 +244,8 @@
     <ClCompile Include="mainScene+cameraControl.cpp" />
     <ClCompile Include="mainScene+renderFunctions.cpp" />
     <ClCompile Include="minion.cpp" />
+    <ClCompile Include="minion2.cpp" />
+    <ClCompile Include="minion3.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="pizza.cpp" />
     <ClCompile Include="player.cpp" />

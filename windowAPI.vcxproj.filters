@@ -246,6 +246,12 @@
     <ClInclude Include="juice.h">
       <Filter>playGround\item\subclass</Filter>
     </ClInclude>
+    <ClInclude Include="minion2.h">
+      <Filter>playGround\enemy\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="minion3.h">
+      <Filter>playGround\enemy\subclass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -430,6 +436,12 @@
     </ClCompile>
     <ClCompile Include="juice.cpp">
       <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="minion2.cpp">
+      <Filter>playGround\enemy\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="minion3.cpp">
+      <Filter>playGround\enemy\subclass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
