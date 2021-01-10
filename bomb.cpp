@@ -23,7 +23,7 @@ HRESULT bomb::init(float x, float y)
 	_index = 0;
 	_indexTime = 0;
 
-	
+	_food = false;
 	
 	return S_OK;
 }

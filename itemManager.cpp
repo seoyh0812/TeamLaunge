@@ -36,6 +36,11 @@ void itemManager::update()
 			_vItem.clear();
 			createBomb(500, CAMY + 500);
 		}
+		if (KEYMANAGER->isOnceKeyDown('3'))
+		{
+			_vItem.clear();
+			createPizza(500, CAMY + 600);
+		}
 	}
 	/*
 	{
@@ -125,6 +130,15 @@ void itemManager::createBomb(float x, float y)
 	vbomb->init(x, y);
 	itemAttack = false;
 	_vItem.push_back(vbomb);
+}
+
+void itemManager::createPizza(float x, float y)
+{
+	pizza* vpizza;
+	vpizza = new pizza;
+	vpizza->init(x, y);
+	
+	_vItem.push_back(vpizza);
 }
 
 void itemManager::throwing()

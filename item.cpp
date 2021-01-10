@@ -14,10 +14,7 @@ HRESULT item::init(float x, float y)
 	return S_OK;
 }
 
-HRESULT item::init(float x, float y, float bottom)
-{
-	return S_OK;
-}
+
 
 void item::release()
 {

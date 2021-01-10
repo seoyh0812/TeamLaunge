@@ -9,6 +9,7 @@ public:
 	~bat();
 
 	virtual HRESULT init(float x, float y);
+	//virtual HRESULT init(float x, float y, float bottom);
 	virtual void release();
 	virtual void update();
 	virtual void render();

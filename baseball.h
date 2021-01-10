@@ -12,6 +12,7 @@ public:
 	//기본 함수.
 
 	virtual HRESULT init(float x, float y);
+	//virtual HRESULT init(float x, float y, float bottom);
 	virtual void release();
 	virtual void update();
 	virtual void render();

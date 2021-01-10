@@ -31,6 +31,7 @@ HRESULT baseball::init(float x, float y)
 	_time = 0;
 	_angle = 0;
 	_strach = false;
+	_food = false;
 	return S_OK;
 }
 
