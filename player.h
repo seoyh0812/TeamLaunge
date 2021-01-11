@@ -13,10 +13,16 @@ enum State {
 	JUMP,
 	WALK,
 	RUN,
+    SLIDE,
+    TACKLE,
+    JUMPATTACK,
 	COMBO1,
 	COMBO11,
 	COMBO12,
-	COMBO13
+	COMBO13,
+    COMBO21,
+    COMBO22,
+    COMBO23
 };
 
 class player :
@@ -36,6 +42,7 @@ private:
 	float _maxHP;
 	attack* _attack;
 	int _count, _index; //프레임 이미지 재생용 카운트, 인덱스.
+    float _jumpPower; // 점프 파워
 
 	// ############ 커맨드 입력 관련 변수(대시, 특수기) #############
 	int _directionChanged;		// 좌우가 몇번 바뀌었는지 카운트(커맨드)
@@ -76,5 +83,6 @@ public:
 	void setLinkEnemy(enemyManager* em) { _em = em; }
 	attack* getAttack() { return _attack; }
 	int& getIndex() { return _index; }
+    float& getJumpPower() { return _jumpPower; }
 };
 
