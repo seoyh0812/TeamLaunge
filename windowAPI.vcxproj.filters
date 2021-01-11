@@ -264,6 +264,36 @@
     <ClInclude Include="combo13.h">
       <Filter>playGround\player\STATE\combo</Filter>
     </ClInclude>
+    <ClInclude Include="cereal.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="fries.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="hamberger.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="pudding.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="combo21.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo22.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo23.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="jumpAttack.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="slide.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="tackle.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -463,6 +493,36 @@
     </ClCompile>
     <ClCompile Include="combo13.cpp">
       <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="cereal.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="fries.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="hamberger.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="pudding.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="combo21.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo22.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo23.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="jumpAttack.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="slide.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="tackle.cpp">
+      <Filter>playGround\player\STATE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
