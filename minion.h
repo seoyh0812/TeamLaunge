@@ -5,7 +5,7 @@
 class minion :	public enemy
 {
 private:
-	int _plAtkNum;				//테스트용 플레이어 공격상태
+
 public:
 	minion();
 	~minion();

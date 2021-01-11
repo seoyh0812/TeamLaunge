@@ -18,7 +18,6 @@ HRESULT enemyManager::init()
 	//몬스터 생성유무 체크(무한생성 방지)
 	_create = WAIT;
 	
-	
 	return S_OK;
 }
 
@@ -74,12 +73,9 @@ void enemyManager::update()
 	{
 		//첫 몬스터 웨이브(볼 몬스터 3마리)
 		createMinion(900, 600);
-		createMinion2(1100, 250);
-		createMinion3(1300, 400);
-		//createMinion(CAMX + 1300, CAMY + 500);
-		//createMinion(CAMX + 1300, CAMY + 600);
-		//createBoss(1600, 400);
-		//보스 테스트
+		createMinion2(700, 500);
+		createMinion3(700, 600);
+		createBoss(1600, 400);
 		_create = END;
 	}
 }
