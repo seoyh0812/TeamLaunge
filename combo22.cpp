@@ -15,7 +15,7 @@ void combo22::updateState()
 
     if (KEYMANAGER->isOnceKeyDown('Z'))
     {
-        _pl->setState(COMBO22);
+        _pl->setState(COMBO23);
     }
 
 }

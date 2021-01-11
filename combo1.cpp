@@ -14,15 +14,16 @@ void combo1::updateState()
 	// 왼쪽이면 왼쪽부터 공격 범위만큼 빼서 생성하게
 	if(_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getFlyRc().left - 150, (_pl->getFlyRc().bottom + _pl->getFlyRc().top) / 2); }
 	
-	if (KEYMANAGER->isOnceKeyDown('Z'))
-	{
-		_pl->setState(COMBO11);
-	}
 
     if ((KEYMANAGER->isStayKeyDown(VK_LEFT) || KEYMANAGER->isStayKeyDown(VK_RIGHT)) && KEYMANAGER->isOnceKeyDown('Z'))
     {
         _pl->setState(COMBO21);
     }
+
+	if (KEYMANAGER->isOnceKeyDown('Z'))
+	{
+		_pl->setState(COMBO11);
+	}
 
 }
 
