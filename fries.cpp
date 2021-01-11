@@ -1,15 +1,14 @@
 #include "stdafx.h"
-#include "pizza.h"
-
-HRESULT pizza::init(float x, float y)
+#include "fries.h"
+HRESULT fries::init(float x, float y)
 {
-	_image = FINDIMG("ÇÇÀÚ");
+	_image = FINDIMG("°¨Æ¢");
 	_x = _xg = x;
 	_y = y;
 	_yg = _y + 50;
 	_distance = _yg - _y;
 	int shadowWidth = _image->getWidth() - (_distance / 2);
-	int shadowHeight = (_image->getHeight() - (_distance / 2))/3;
+	int shadowHeight = (_image->getHeight() - (_distance / 2)) / 3;
 
 	_rc = RectMakeCenter(_x, _y, _image->getWidth(), _image->getHeight());
 	_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());
@@ -22,9 +21,9 @@ HRESULT pizza::init(float x, float y)
 	return S_OK;
 }
 
-HRESULT pizza::init(float x, float y, float bottom)
+HRESULT fries::init(float x, float y, float bottom)
 {
-	_image = FINDIMG("ÇÇÀÚ");
+	_image = FINDIMG("°¨Æ¢");
 	_x = _xg = x;
 	_y = y;
 	_yg = bottom;
@@ -43,7 +42,7 @@ HRESULT pizza::init(float x, float y, float bottom)
 	return S_OK;
 }
 
-//HRESULT pizza::init(float x, float y, float bottom)
+//HRESULT fries::init(float x, float y, float bottom)
 //{
 //	_image = FINDIMG("ÇÇÀÚ");
 //	_x = _xg = x;
@@ -62,11 +61,11 @@ HRESULT pizza::init(float x, float y, float bottom)
 //	return S_OK;
 //}
 
-void pizza::release()
+void fries::release()
 {
 }
 
-void pizza::update()
+void fries::update()
 {
 	_distance = _yg - _y;
 	int shadowWidth = _image->getWidth() - (_distance / 2);
@@ -74,16 +73,16 @@ void pizza::update()
 	_shadow = RectMakeCenter(_xg, _rcg.bottom, shadowWidth, shadowHeight);
 	_rc = RectMakeCenter(_x, _y, _image->getWidth(), _image->getHeight());
 	drop();
-	
+
 }
 
-void pizza::render()
+void fries::render()
 {
 	shadowRender(_shadow);
 	_image->render(getMemDC(), _rc.left, _rc.top);
 }
 
-void pizza::drop()
+void fries::drop()
 {
 	if (_yg > _y)
 	{
@@ -93,8 +92,7 @@ void pizza::drop()
 	else _y = _yg;
 }
 
-void pizza::setHold()
+void fries::setHold()
 {
 	_delete = true;
 }
-

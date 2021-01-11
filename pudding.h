@@ -1,11 +1,9 @@
 #pragma once
 #include "item.h"
-class pizza:public item
+class pudding :
+	public item
 {
-private:
-	
 public:
-
 	virtual HRESULT init(float x, float y);
 	virtual HRESULT init(float x, float y, float bottom);
 	virtual void release();

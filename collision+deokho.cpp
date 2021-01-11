@@ -15,11 +15,15 @@ void collision::deokhoUpdate()
 		{
 			if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 			{
+				if(_im->getVItem()[i]->isFood()) //¸ÔÀ» °ÅÀÓ.
+				{
+					_im->getVItem()[i]->setHold();
+				}
 				if (!_im->getVItem()[i]->isFood())
 				{//¸ÔÀ» °Å ¾Æ´Ô : °øÀÌ³ª ÆøÅº°°ÀÌ Áý¾î ´øÁö°Å³ª ÇÏ´Â °Íµé
 					if (!_im->getVItem()[i]->getPickup() && !_im->getVItem()[i]->getMoving())
 					{
-						_im->getVItem()[i]->setHold(_pl->getFlyX(), _pl->getFlyY());
+						_im->getVItem()[i]->setHold(_pl->getFlyX(), _pl->getFlyY(), _pl->getFlyRc().bottom);
 						return;
 					}
 					if (_im->getVItem()[i]->getPickup() && !_im->getVItem()[i]->getMoving())
@@ -28,14 +32,10 @@ void collision::deokhoUpdate()
 						_im->getVItem()[i]->attackMove(_pl->getLeft());
 					}
 				}
-				else //¸ÔÀ» °ÅÀÓ.
-				{
-
-				}
 				
 			}
 		}
-		if(_im->getVItem()[i]->getPickup()==true) _im->getVItem()[i]->setHold(_pl->getFlyX(), _pl->getFlyY());
+		if(_im->getVItem()[i]->getPickup()==true) _im->getVItem()[i]->setHold(_pl->getFlyX(), _pl->getFlyY(), _pl->getFlyRc().bottom);
 	}
 
 	

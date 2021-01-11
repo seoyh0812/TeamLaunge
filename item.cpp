@@ -16,6 +16,11 @@ HRESULT item::init(float x, float y)
 
 
 
+HRESULT item::init(float x, float y, float bottom)
+{
+	return S_OK;
+}
+
 void item::release()
 {
 }
@@ -60,7 +65,15 @@ void item::attackMove(bool direction)
 }
 
 
+void item::setHold()
+{
+}
+
 void item::setHold(float x, float y)
+{
+}
+
+void item::setHold(float x, float y, float bottom)
 {
 }
 
