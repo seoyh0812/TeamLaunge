@@ -264,6 +264,24 @@
     <ClInclude Include="combo13.h">
       <Filter>playGround\player\STATE\combo</Filter>
     </ClInclude>
+    <ClInclude Include="combo21.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo22.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo23.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="jumpAttack.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="slide.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="tackle.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -463,6 +481,24 @@
     </ClCompile>
     <ClCompile Include="combo13.cpp">
       <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo21.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo22.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo23.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="jumpAttack.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="slide.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="tackle.cpp">
+      <Filter>playGround\player\STATE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

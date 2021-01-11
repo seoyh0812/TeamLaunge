@@ -23,7 +23,7 @@
     <ProjectGuid>{19D559FB-F5D0-4C3C-9B48-720C72E962E0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>windowAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -161,6 +161,9 @@
     <ClInclude Include="combo11.h" />
     <ClInclude Include="combo12.h" />
     <ClInclude Include="combo13.h" />
+    <ClInclude Include="combo21.h" />
+    <ClInclude Include="combo22.h" />
+    <ClInclude Include="combo23.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="itemManager.h" />
     <ClInclude Include="juice.h" />
     <ClInclude Include="jump.h" />
+    <ClInclude Include="jumpAttack.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="minion.h" />
@@ -192,10 +196,12 @@
     <ClInclude Include="run.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="singletonBase.h" />
+    <ClInclude Include="slide.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stageManager.h" />
     <ClInclude Include="STATE.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="tackle.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
@@ -227,6 +233,9 @@
     <ClCompile Include="combo11.cpp" />
     <ClCompile Include="combo12.cpp" />
     <ClCompile Include="combo13.cpp" />
+    <ClCompile Include="combo21.cpp" />
+    <ClCompile Include="combo22.cpp" />
+    <ClCompile Include="combo23.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="endingScene.cpp" />
@@ -245,6 +254,7 @@
     <ClCompile Include="itemManager.cpp" />
     <ClCompile Include="juice.cpp" />
     <ClCompile Include="jump.cpp" />
+    <ClCompile Include="jumpAttack.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="mainScene+cameraControl.cpp" />
@@ -261,6 +271,7 @@
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="run.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="slide.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stageManager.cpp" />
     <ClCompile Include="STATE.cpp" />
@@ -270,6 +281,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="tackle.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="titleScene.cpp" />

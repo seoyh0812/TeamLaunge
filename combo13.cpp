@@ -18,4 +18,5 @@ void combo13::updateState()
 
 void combo13::ExitState()
 {
+    _pl->getIndex() = 0;
 }

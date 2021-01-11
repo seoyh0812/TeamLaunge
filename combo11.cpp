@@ -15,7 +15,6 @@ void combo11::updateState()
 
 	if (KEYMANAGER->isOnceKeyDown('Z'))
 	{
-		_pl->getIndex() = 0;
 		_pl->setState(COMBO12);
 	}
 
@@ -23,4 +22,5 @@ void combo11::updateState()
 
 void combo11::ExitState()
 {
+    _pl->getIndex() = 0;
 }

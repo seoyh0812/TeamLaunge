@@ -16,12 +16,17 @@ void combo1::updateState()
 	
 	if (KEYMANAGER->isOnceKeyDown('Z'))
 	{
-		_pl->getIndex() = 0;
 		_pl->setState(COMBO11);
 	}
+
+    if ((KEYMANAGER->isStayKeyDown(VK_LEFT) || KEYMANAGER->isStayKeyDown(VK_RIGHT)) && KEYMANAGER->isOnceKeyDown('Z'))
+    {
+        _pl->setState(COMBO21);
+    }
 
 }
 
 void combo1::ExitState()
 {
+    _pl->getIndex() = 0;
 }
