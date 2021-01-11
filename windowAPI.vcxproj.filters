@@ -85,9 +85,6 @@
     <Filter Include="playGround\player\STATE\combo">
       <UniqueIdentifier>{870678d6-c5f1-47d0-98b4-d83f892a3b34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\item\subclass\food">
-      <UniqueIdentifier>{565e5373-70b0-4aa3-a794-8b71096f124b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -243,6 +240,12 @@
     <ClInclude Include="bomb.h">
       <Filter>playGround\item\subclass</Filter>
     </ClInclude>
+    <ClInclude Include="pizza.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="juice.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
     <ClInclude Include="minion2.h">
       <Filter>playGround\enemy\subclass</Filter>
     </ClInclude>
@@ -260,50 +263,6 @@
     </ClInclude>
     <ClInclude Include="combo13.h">
       <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-    <ClInclude Include="cereal.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="fries.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="juice.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="pizza.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="pudding.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="hamberger.h">
-      <Filter>playGround\item\subclass\food</Filter>
-=======
->>>>>>> Stashed changes
-    <ClInclude Include="combo21.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="combo22.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="combo23.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="jumpAttack.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="slide.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="tackle.h">
-      <Filter>playGround\player\STATE</Filter>
-<<<<<<< Updated upstream
-=======
->>>>>>> 77fe443e18c935b0baa003ec22515d94abb99415
->>>>>>> Stashed changes
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +440,12 @@
     <ClCompile Include="bomb.cpp">
       <Filter>playGround\item\subclass</Filter>
     </ClCompile>
+    <ClCompile Include="pizza.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="juice.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
     <ClCompile Include="minion2.cpp">
       <Filter>playGround\enemy\subclass</Filter>
     </ClCompile>
@@ -498,50 +463,6 @@
     </ClCompile>
     <ClCompile Include="combo13.cpp">
       <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-    <ClCompile Include="cereal.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="fries.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="juice.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="pizza.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="pudding.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="hamberger.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-=======
->>>>>>> Stashed changes
-    <ClCompile Include="combo21.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="combo22.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="combo23.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="jumpAttack.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="slide.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="tackle.cpp">
-      <Filter>playGround\player\STATE</Filter>
-<<<<<<< Updated upstream
-=======
->>>>>>> 77fe443e18c935b0baa003ec22515d94abb99415
->>>>>>> Stashed changes
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
