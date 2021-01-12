@@ -150,13 +150,15 @@ void baseball::attackMove(bool direction)
 {//매니저에서 사용할 함수.
 	_pickup = false;
 	_moving = true;
-	if (direction==true)
+	_direction = direction;
+	if (_direction==true)
 	{
-		_x += 12.2f;
+		_x += 17.2f;
 	}
 	else
 	{
-		_x -= 12.2f;
+		_x -= 17.2f;
 	}
-	_y -= sinf(_angle);//충돌시 튕겨나가는 느낌을 주기위해.
+	_y -= 10 * sinf(_angle);//충돌시 튕겨나가는 느낌을 주기위해.
+	_yg -= 10 * sinf(_angle);
 }
