@@ -4,7 +4,7 @@
 
 void combo23::EnterState()
 {
-
+	_pl->getIndex() = 0;
 }
 
 void combo23::updateState()
@@ -18,5 +18,4 @@ void combo23::updateState()
 
 void combo23::ExitState()
 {
-    _pl->getIndex() = 0;
 }

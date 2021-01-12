@@ -4,7 +4,7 @@
 
 void combo11::EnterState()
 {
-
+	_pl->getIndex() = 0;
 }
 
 void combo11::updateState()
@@ -22,5 +22,4 @@ void combo11::updateState()
 
 void combo11::ExitState()
 {
-    _pl->getIndex() = 0;
 }

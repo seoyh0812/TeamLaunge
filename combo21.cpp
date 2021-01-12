@@ -4,7 +4,7 @@
 
 void combo21::EnterState()
 {
-
+	_pl->getIndex() = 0;
 }
 
 void combo21::updateState()
@@ -22,5 +22,4 @@ void combo21::updateState()
 
 void combo21::ExitState()
 {
-    _pl->getIndex() = 0;
 }

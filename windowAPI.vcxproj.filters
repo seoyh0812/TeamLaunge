@@ -297,6 +297,12 @@
     <ClInclude Include="pudding.h">
       <Filter>playGround\item\subclass\food</Filter>
     </ClInclude>
+    <ClInclude Include="grab.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="grabswing.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -526,6 +532,12 @@
     </ClCompile>
     <ClCompile Include="pudding.cpp">
       <Filter>playGround\item\subclass\food</Filter>
+    </ClCompile>
+    <ClCompile Include="grab.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="grabswing.cpp">
+      <Filter>playGround\player\STATE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

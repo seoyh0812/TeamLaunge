@@ -1,13 +1,13 @@
 #include "stdafx.h"
-#include "combo13.h"
+#include "grabswing.h"
 #include "player.h"
 
-void combo13::EnterState()
+void grabswing::EnterState()
 {
-	_pl->getIndex() = 0;
+
 }
 
-void combo13::updateState()
+void grabswing::updateState()
 {
 
 	if (!_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getFlyRc().right, (_pl->getFlyRc().bottom + _pl->getFlyRc().top) / 2); }
@@ -16,6 +16,7 @@ void combo13::updateState()
 
 }
 
-void combo13::ExitState()
+void grabswing::ExitState()
 {
+	_pl->getIndex() = 0;
 }
