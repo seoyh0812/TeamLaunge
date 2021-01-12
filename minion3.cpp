@@ -19,6 +19,7 @@ void minion3::enemyState()
 	//GRAB상태에서만 grab카운트가 더해진다
 	if (_state == E_GRAB) _grabCount++;
 
+
 	//공격범위 안에 플레이어가 있는지 체크함, 플레이어와 에너미의 간격이 100미만이면 true
 	if (getDistance(_x, _y, _pX, _pY) < 100) _atkArea = true;
 	//간격이 100이상이면 false
@@ -119,7 +120,7 @@ void minion3::enemyState()
 		break;
 
 	case E_DEAD:
-		if (_index > 3) _index = 0;
+		if (_index > 3) _isDead = true;
 		break;
 
 	case E_HIT:
@@ -221,6 +222,7 @@ HRESULT minion3::init(float x, float y)
 	_state = E_IDLE;
 	_left = true;
 	_flying = false;
+	_isDead = false;
 	return S_OK;
 }
 

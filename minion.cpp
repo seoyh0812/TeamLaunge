@@ -16,6 +16,8 @@ void minion::enemyState()
 	if (_state == E_HIT) _hitCount++;
 	//GRAB상태에서만 grab카운트가 더해진다
 	if (_state == E_GRAB) _grabCount++;
+	//DEAD상태에서 공중에 뜨는 시간을 체크하기위해 만듬
+	if (_state == E_DEAD) _flyingCount++;
 
 	//공격범위 안에 플레이어가 있는지 체크함, 플레이어와 에너미의 간격이 100미만이면 true
 	if (getDistance(_x, _y, _pX, _pY) < 100) _atkArea = true;
@@ -146,19 +148,39 @@ void minion::enemyState()
 		break;
 
 	case E_DEAD:
-		if (_index > 6)
+		if (_flyingCount > 90)
 		{
-			_index = 0;
+			_deadFly = true;
+			_flyingCount = 0;
+			if (_index > 6 && _deadFly)
+			{
+				_isDead = true;
+			}
+		}
+		if (_left)
+		{
+			_x += 4;
+			_y -= 1;
+		}
+		else
+		{
+			_x -= 4;
+			_y -= 1;
 		}
 		break;
 
 	case E_HIT:
+		if (_currentHP <= 0)
+		{
+			_state = E_DEAD;
+		}
 		_index = 0;
 		
 		//피격모션 유지시간 (30 = 0.5초)
 		//0.5초가 지나면 IDLE상태로 변경됨
-		if (_hitCount > 30)
+		if (_hitCount > 30 && _currentHP > 0)
 		{
+			_currentHP -= 20;
 			_state = E_IDLE;
 			_hitCount = 0;
 		}
@@ -177,9 +199,15 @@ void minion::enemyState()
 		break;
 
 	case E_FLYING:
+		//날고있는상태에서 인덱스를 고정시켜줌
+		if (_flying) _index = 0;
+
 		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
 		if (_rc.right > CAMX + WINSIZEX && _flying && _left)
 		{
+			if (_currentHP <= 0) _state = E_DEAD;
+			else _currentHP -= 20;
+
 			_flying = false;
 			_index = 1;
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
@@ -188,6 +216,9 @@ void minion::enemyState()
 		//몬스터 렉트의 레프트가 카메라 화면 왼쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
 		if (_rc.left < CAMX && _flying && !_left)
 		{
+			if (_currentHP <= 0) _state = E_DEAD;
+			else _currentHP -= 20;
+
 			_flying = false;
 			_index = 1;
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
@@ -271,13 +302,15 @@ HRESULT minion::init(float x, float y)
 {
 	_x = CAMX + x;	_y = CAMY + y;
 	_currentHP = _maxHP = 100;
-	_count = _index = _attackCount = _hitCount = _grabCount = 0;
+	_count = _index = _attackCount = _hitCount = _grabCount = _flyingCount = 0;
 	_state = E_IDLE;
 	_left = true;
 	_plAtkNum = 1;
 	_flying = false;
 	_atkArea = false;
 	_randomNum = RND->getFromIntTo(20, 50);
+	_isDead = false;
+	_deadFly = false;
 	return S_OK;
 }
 
@@ -290,7 +323,7 @@ void minion::update()
 	_rc = RectMakeCenter(_x, _y, 150, 150);
 	enemyState();
 	//테스트용, 파일 합치기전엔 항상 주석처리할것
-	//keyManager();
+	keyManager();
 	
 	
 	//상태에 따라 그림자의 크기를 다르게하여 그려줍니다

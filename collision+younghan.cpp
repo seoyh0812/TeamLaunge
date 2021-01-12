@@ -14,13 +14,13 @@ void collision::younghanUpdate()
 
 	for (int i = 0; i < _em->getVEnemy().size(); ++i)
 	{
+		if (_em->getVEnemy()[i]->getState() == E_HIT || _em->getVEnemy()[i]->getState() == E_DEAD) continue;
 		for (int j = 0; j < _pl->getAttack()->getVAttack().size(); ++j)
 		{
 			RECT temp;
 			if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRect(), &_pl->getAttack()->getVAttack()[j].rc))
 			{
 				_em->getVEnemy()[i]->getState() = E_HIT;
-				//_em->getVEnemy()[i]->
 				hitted = true;
 			}
 		}

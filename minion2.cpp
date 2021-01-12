@@ -16,6 +16,8 @@ void minion2::enemyState()
 	if (_state == E_HIT) _hitCount++;
 	//GRAB상태에서만 grab카운트가 더해진다
 	if (_state == E_GRAB) _grabCount++;
+	//DEAD상태에서만 dead카운트가 더해진다
+	if (_state == E_DEAD) _deadCount++;
 
 	//공격범위 안에 플레이어가 있는지 체크함, 플레이어와 에너미의 간격이 100미만이면 true
 	if (getDistance(_x, _y, _pX, _pY) < 100) _atkArea = true;
@@ -118,6 +120,11 @@ void minion2::enemyState()
 
 	case E_DEAD:
 		_index = 0;
+		if (_deadCount > 30)
+		{
+			_isDead = true;
+			_deadCount = 0;
+		}
 		break;
 
 	case E_HIT:
@@ -215,10 +222,11 @@ HRESULT minion2::init(float x, float y)
 {
 	_x = CAMX + x;	_y = CAMY + y;
 	_currentHP = _maxHP = 100;
-	_count = _index = _attackCount = _hitCount = _grabCount = 0;
+	_count = _index = _attackCount = _hitCount = _grabCount = _deadCount = 0;
 	_state = E_IDLE;
 	_left = true;
 	_flying = false;
+	_isDead = false;
 	return S_OK;
 }
 

@@ -21,6 +21,10 @@ protected:
 	int _keyManagerNum;				//키매니저 몬스터 선택상태
 	bool _atkArea;					//몬스터 1 공격범위 안에서 움직일수 있게 체크해줌
 	int _randomNum;					//몬스터 y좌표 랜덤값 지정 (겹치지않게하기위함)
+	bool _isDead;					//몬스터가 죽었는지 살았는지 여부 체크
+	int _deadCount;					//죽는 모션이 1개인 경우 죽고 난 다음 일정시간을 유지하기위해 만듬
+	int _flyingCount;				//체공시간을 체크하려고 만듬
+	bool _deadFly;					//임의로 지은이름, 죽기전에 나는 동작이있는데 일정 시간동안 날고있는지 여부를 체크하기위해 만듬
 
 	RECT _shadow;
 
@@ -41,6 +45,7 @@ public:
 	RECT& getRect() { return _rc; }
 	RECT& getShadow() { return _shadow; }
 	float& getHp() { return _currentHP; }
+	bool& getIsDead() { return _isDead; }
 	enemyState& getState() { return _state; }
 	void setPlayerPt(float x, float y) { _pX = x; _pY = y; }
 };
