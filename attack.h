@@ -27,6 +27,9 @@ private:
 	player* _pl;
 
 public:
+
+	RECT _attackRect;
+
 	attack() {};
 	~attack() {};
 
@@ -36,7 +39,7 @@ public:
 	void render();
 
 	void Attack(float x, float y);
-
+	RECT getAttackRect() { return _attackRect; }
 	void removeAttack(int arrNum);
 
 	vector<tagAttack> getVAttack()				{ return _vAttack; }

@@ -52,7 +52,7 @@ void attack::Attack(float x, float y)
 	attack.y = attack.attackY = y;
 
 	attack.rc = RectMake(attack.x, attack.y, 150, 20); 
-	 
+	_attackRect = RectMake(attack.x, attack.y, 150, 20);
 
 	_vAttack.push_back(attack);
 }
