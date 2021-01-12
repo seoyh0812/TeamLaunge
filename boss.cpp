@@ -22,7 +22,7 @@ void boss::bossState()
 	if (getDistance(_x, _y, _pX, _pY) >= 100) _atkArea = false;
 
 
-	if (_phaseCount > 400) // 페이즈 바꿈
+	if (_phaseCount > 300) // 페이즈 바꿈
 	{
 		_phase = 1 + rand() % 2;
 		_destX = _pX;	_destY = _pY; // 목적지설정
@@ -74,11 +74,25 @@ void boss::bossState()
 				_index = 0;
 			}
 		}
+		else
+		{
+			_attackCount++;
+			if (_attackCount > 45)
+			{
+				_state = E_ATK;
+				_index = 0;
+				_attackCount = 0;
+			}
+		}
+
 		break;
 
 	case E_WALK:
 		//프레임 이미지 최대 렌더값을 초과하지않도록 초기화해줌
 		if (_index > 3) _index = 0;
+
+		if (_destX > _x) _left = false;
+		else _left = true;
 		//플레이어와 에너미의 거리가 200이하라면 ATK상태로 변경 후
 		//이미지를 처음부터 렌더하기위해 인덱스 초기화
 		if (getDistance(_x, _y, _pX, _pY) <= 200)
@@ -148,8 +162,8 @@ void boss::bossState()
 			_left = false; //에너미는 오른쪽을 바라보고
 			if (!_atkArea) //플레이어의 아래좌표까지 이동한다.
 			{
-				_x += 2.7f * cosf(getAngle(_x, _y, _pX - 100, _pY));
-				_y -= 2.7f * sinf(getAngle(_x, _y, _pX - 100, _pY));
+				_x += 4.f * cosf(getAngle(_x, _y, _pX - 100, _pY));
+				_y -= 4.f * sinf(getAngle(_x, _y, _pX - 100, _pY));
 			}
 		}
 		break;
@@ -171,16 +185,13 @@ void boss::bossState()
 
 	case E_HIT:
 		_index = 0;
-
 		//피격모션 유지시간 (30 = 0.5초)
 		//0.5초가 지나면 IDLE상태로 변경됨
 		if (_hitCount > 30)
 		{
-			_state = E_IDLE;
+			_state = E_WALK;
 			_hitCount = 0;
 		}
-		if (_left) ++_x;
-		else --_x;
 		break;
 
 	case E_GRAB:
@@ -220,7 +231,7 @@ void boss::bossState()
 		//이미지가 정상적으로 마지막까지 렌더된다면 IDLE상태로 변경시키고 인덱스를 초기화
 		if (_index > 3)
 		{
-			_state = E_IDLE;
+			_state = E_WALK;
 			_index = 0;
 		}
 		break;
@@ -237,7 +248,7 @@ void boss::phase1() // 공격렉트가 전신에 생겨서 치고다님
 	else
 	{
 		++_rideCount;
-		if (_rideCount > 120)
+		if (_rideCount > 100)
 		{
 			_rideCount = 0;
 			_destX = _pX;
@@ -246,7 +257,7 @@ void boss::phase1() // 공격렉트가 전신에 생겨서 치고다님
 			else _left = true;
 		}
 	}
-	if (_phaseCount > 600)
+	if (_phaseCount > 300)
 	{
 		_phaseCount = 0; _phase = 0; _index = _rideCount = 0;
 		_state = E_IDLE;
@@ -260,21 +271,23 @@ void boss::phase1() // 공격렉트가 전신에 생겨서 치고다님
 }
 
 void boss::phase2()
-{ // 이때는 그림자 렌더도 _destY에다 만들어야할듯
+{ 
 	if (_jumping)
 	{ // 점프중
 		_y -= 20;
 		if (_destY - _y > WINSIZEY)
 		{
-			_jumping = false;
+			_destY = _pY+60;
+			_destX = _pX;
 			_x = _destX;
+			_jumping = false;
 		}
 	}
-	else if (_destY > _y)
+	else if (_destY > _rc.bottom)
 	{ // 착지
 		_y += 20;
 	}
-	else if (_destY <= _rc.bottom && !_jumping)
+	else if (_destY <= _rc.bottom)
 	{ // 착지후 쉐이킹
 		_phaseCount = 0; _phase = 0; _index = _shakeCount = 0;
 		_state = E_SHAKE;
@@ -295,6 +308,7 @@ HRESULT boss::init(float x, float y)
 	_count = _index = _attackCount = _hitCount = _grabCount = _phaseCount = _rideCount = 0;
 	_state = E_IDLE;
 	_phase = 0;
+	_plAtkNum = 1;
 	_flying = _atkArea = _left = false;
 	   
 	_destX = _destY = 0;
@@ -318,34 +332,64 @@ void boss::update()
 	if (_phase == 0 ) bossState();
 	else if (_phase == 1) phase1();
 	else if (_phase == 2) phase2();
-
-	_rc = RectMakeCenter(_x, _y, 200, 200);
+	//상태에 따라 그림자의 크기를 다르게하여 그려줍니다
+	if (_phase == 0)
+	{
+		switch (_state)
+		{
+		case E_IDLE: case E_WALK: case E_ATK: case E_HIT: case E_GRAB:
+			_rc = RectMakeCenter(_x, _y, 150, 200);
+			_shadow = RectMakeCenter(_rc.left + 75, _rc.bottom + 10, 150, 50);
+			break;
+		case E_DEAD: case E_FLYING:
+			_rc = RectMakeCenter(_x, _y, 208, 200);
+			_shadow = RectMakeCenter(_rc.left + 104, _rc.bottom + 10, 208, 50);
+			break;
+		case E_SHAKE:		case E_WALK2:
+			_rc = RectMakeCenter(_x, _y+40, 180, 120);
+			_shadow = RectMakeCenter(_rc.left + 90, _rc.bottom + 10, 180, 50);
+			break;
+		}
+	}	
+	if (_phase == 1)
+	{ // 차탔음
+		_rc = RectMakeCenter(_x, _y, 200, 200);
+		_shadow = RectMakeCenter(_rc.left + 100, _rc.bottom + 50, 350, 70);
+	}
+	if (_phase == 2)
+	{
+		_rc = RectMakeCenter(_x, _y, 180, 120);
+		if (_jumping)
+		{
+			_shadow = RectMake(_shadow.left, _shadow.top, 180, 50);
+		}
+		else  _shadow = RectMakeCenter(_destX, _destY+60, 180, 50);
+	}
 }
 
 void boss::render()
 {
-	Rectangle(getMemDC(), _rc);
-
+	fillColorEllipse(40, 40, 40, _shadow);
 	if (_phase == 0)
 	{
 		//볼 몬스터의 상태에 따라 렌더되는 이미지를 정해줌
 		switch (_state)
 		{
 		case E_SHAKE:
-			if (_left) FINDIMG("boss_shakes")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
-			else FINDIMG("boss_shakes")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0);		break;
+			if (_left) FINDIMG("boss_shakes")->frameRender(getMemDC(), _rc.left-20, _rc.top-15, _index, 1);
+			else FINDIMG("boss_shakes")->frameRender(getMemDC(), _rc.left-30, _rc.top-15, _index, 0);		break;
 		case E_IDLE:
-			if (_left) FINDIMG("boss_idle")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
-			else FINDIMG("boss_idle")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0);		break;
+			if (_left) FINDIMG("boss_idle")->frameRender(getMemDC(), _rc.left-48, _rc.top, _index, 1);
+			else FINDIMG("boss_idle")->frameRender(getMemDC(), _rc.left-20, _rc.top, _index, 0);		break;
 		case E_WALK:
-			if (_left) FINDIMG("boss_walk")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
-			else FINDIMG("boss_walk")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0);		break;
+			if (_left) FINDIMG("boss_walk")->frameRender(getMemDC(), _rc.left-15, _rc.top, _index, 1);
+			else FINDIMG("boss_walk")->frameRender(getMemDC(), _rc.left-25, _rc.top, _index, 0);		break;
 		case E_WALK2:
-			if (_left) FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left - 61, _rc.top, _index, 1);
-			else FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left - 74, _rc.top, _index, 0);		break;
+			if (_left) FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left-21, _rc.top-5, _index, 1);
+			else FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left-40, _rc.top-5, _index, 0);		break;
 		case E_ATK:
-			if (_left) FINDIMG("boss_atk")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
-			else FINDIMG("boss_atk")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0);		break;
+			if (_left) FINDIMG("boss_atk")->frameRender(getMemDC(), _rc.left-120, _rc.top, _index, 1);
+			else FINDIMG("boss_atk")->frameRender(getMemDC(), _rc.left-45, _rc.top, _index, 0);		break;
 		case E_DEAD:
 			if (_left) FINDIMG("boss_dead")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
 			else FINDIMG("boss_dead")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0);		break;
@@ -354,32 +398,31 @@ void boss::render()
 			// 1 = 오른쪽에서 왼쪽으로 공격 , 2 = 왼쪽에서 오른쪽으로 공격
 			if (_plAtkNum == 1)
 			{
-				if (_left) FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
-				else FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0);
+				if (_left) FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 33, _rc.top, 0, 1);
+				else FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0);	break;
 			}
 			if (_plAtkNum == 2)
 			{
-				if (_left) FINDIMG("boss_hit2")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
-				else FINDIMG("boss_hit2")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0);
+				if (_left) FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 33, _rc.top, 0, 1);
+				else FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0);	break;
 			}
-			break;
 		case E_GRAB:
-			if (_left) FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
-			else FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0); break;
+			if (_left) FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left-5, _rc.top, _index, 1);
+			else FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left-3, _rc.top, _index, 0); break;
 		case E_FLYING:
-			if (_left) FINDIMG("enemy1_flying")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
-			else FINDIMG("enemy1_flying")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0); break;
+			if (_left) FINDIMG("boss_dead")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
+			else FINDIMG("boss_dead")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0); break;
 		}
 	}
 	else if (_phase == 1)
 	{
-		if (_left) FINDIMG("boss_car")->frameRender(getMemDC(), _rc.left-75, _rc.top-90, _index, 1);
-		else FINDIMG("boss_car")->frameRender(getMemDC(), _rc.left-136, _rc.top-90, _index, 0);
+		if (_left) FINDIMG("boss_car")->frameRender(getMemDC(), _rc.left-100, _rc.top-50, _index, 1);
+		else FINDIMG("boss_car")->frameRender(getMemDC(), _rc.left-100, _rc.top-50, _index, 0);
 	}
 	else if (_phase == 2)
 	{
-		if (_left) FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left-61, _rc.top, _index, 1);
-		else FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left-74, _rc.top, _index, 0);
+		if (_left) FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left - 21, _rc.top-5, _index, 1);
+		else FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left - 40, _rc.top - 5, _index, 0);
 	}
-
+	if (KEYMANAGER->isToggleKey(VK_F1)) Rectangle(getMemDC(), _rc);
 }
