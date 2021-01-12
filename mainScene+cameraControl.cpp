@@ -19,7 +19,7 @@ void mainScene::cameraControl()
 	_playerWidth = _pl->getGroundRc().right - _pl->getGroundRc().left;
 	if (_pl->getGroundRc().bottom < CAMY + 442)
 	{
-		_pl->getGroundY() = CAMY + 442 - _playerHeight/2;
+		_pl->getGroundY() = CAMY + 442 - _playerHeight / 2;
 		_pl->getFlyY() = CAMY + 442 - _playerHeight / 2;
 	}
 	if (_pl->getGroundRc().bottom > CAMY + WINSIZEY)
@@ -40,7 +40,7 @@ void mainScene::cameraControl()
 
 	if (_mapChanging && CAMY > 55)
 	{
-		CAMERAMANAGER->setCameraY(CAMY-20);
+		CAMERAMANAGER->setCameraY(CAMY - 20);
 		_pl->setState(JUMP);
 		_pl->getGroundX() = _tempX;
 		_pl->getGroundY() -= 20;
@@ -48,6 +48,7 @@ void mainScene::cameraControl()
 		_pl->getFlyY() = _pl->getGroundY() - 200;
 		if (CAMY < 55)
 		{
+
 			CAMERAMANAGER->setCameraY(55);
 			_mapChanging = false;
 		}
@@ -67,8 +68,8 @@ void mainScene::cameraControl()
 
 	if (_redCount < 29) ++_redCount;
 	else _redCount = 0;
-	
 
-	if (CAMX >= MAPSIZEX-WINSIZEX) SCENEMANAGER->changeScene("¿£µù¾À");
+
+	if (CAMX >= MAPSIZEX - WINSIZEX) SCENEMANAGER->changeScene("¿£µù¾À");
 }
 

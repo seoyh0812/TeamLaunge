@@ -284,6 +284,7 @@
     <ClCompile Include="run.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="slide.cpp" />
+    <ClCompile Include="soundInit.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stageManager.cpp" />
     <ClCompile Include="STATE.cpp" />

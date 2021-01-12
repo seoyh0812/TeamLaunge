@@ -539,6 +539,9 @@
     <ClCompile Include="grabswing.cpp">
       <Filter>playGround\player\STATE</Filter>
     </ClCompile>
+    <ClCompile Include="soundInit.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc">

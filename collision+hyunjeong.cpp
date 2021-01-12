@@ -16,6 +16,7 @@ void collision::hyunjungUpdate()
 		{
 			if (_sm->getVObject()[i]->getId() == 1)
 			{
+				SOUNDMANAGER->play("쓰레기통부수는소리");
 				RECT src = _sm->getVObject()[i]->getRect();
 				float cenX = (src.right + src.left) / 2;
 				float cenY = (src.top + src.bottom) / 2;

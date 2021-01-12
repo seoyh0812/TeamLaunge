@@ -15,11 +15,11 @@ void collision::deokhoUpdate()
 		{
 			if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 			{
-				if(_im->getVItem()[i]->isFood()) //먹을 거임.
+				if (_im->getVItem()[i]->isFood()) //먹을 거임.
 				{
+					SOUNDMANAGER->play("먹는소리");
 					_im->getVItem()[i]->setHold();
 				}
-
 
 				if (!_im->getVItem()[i]->isFood())
 				{//먹을 거 아님 : 공이나 폭탄같이 집어 던지거나 하는 것들
@@ -30,14 +30,14 @@ void collision::deokhoUpdate()
 					}
 					if (_im->getVItem()[i]->getPickup() && !_im->getVItem()[i]->getMoving())
 					{//던지기. 들려있고, 움직이도록 하지 않음.
+						if (_im->getVItem()[i]->getID() != 0)	SOUNDMANAGER->play("던지기");
 						_im->throwing(!_pl->getLeft());
 						_im->getVItem()[i]->attackMove(_pl->getLeft());
 					}
 				}
-				
 			}
 		}
-		if(_im->getVItem()[i]->getPickup()==true) _im->getVItem()[i]->setHold(_pl->getFlyX(), _pl->getFlyY(), _pl->getFlyRc().bottom);
+		if (_im->getVItem()[i]->getPickup() == true) _im->getVItem()[i]->setHold(_pl->getFlyX(), _pl->getFlyY(), _pl->getFlyRc().bottom);
 		//if(들고있는 상태) 아이템 위치 계속 초기화.
 	}
 
@@ -51,19 +51,21 @@ void collision::deokhoUpdate()
 				{//충돌했니?
 					if (_im->getVItem()[i]->getID() == 1)
 					{//야구공이니?
+						SOUNDMANAGER->play("타격2");
 						if (_im->getVItem()[i]->getDirection()) _im->getVItem()[i]->makeInflect(+1.5f);
-							//오른쪽으로 던져졌니?
+						//오른쪽으로 던져졌니?
 						else _im->getVItem()[i]->makeInflect(1.5f);
 					}
 					if (_im->getVItem()[i]->getID() == 2)
 					{
+						
 						_im->getVItem()[i]->makeBoom();
 					}
 				}
 			}
 		}
 	}
-	
+
 }
 
 void collision::deokhoRender()

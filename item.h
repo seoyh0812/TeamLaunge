@@ -17,7 +17,7 @@ protected:
 	int _distance;//공중렉트, 지상렉트 위치차이.
 	int _tall;
 	float _time;//이미지, 상황 변환용 변수.
-	
+
 	int _ID; //아이템 구별 위해서.
 	bool _direction;
 	float _angle; //이동시 각 이용해서 변하게.
@@ -64,6 +64,6 @@ public:
 	inline void makeBoom() { _delete = true; }//얘는 폭탄
 	inline void makeInflect(float angle) { _angle += angle; }//얘는 야구공
 
-	
+
 };
 
