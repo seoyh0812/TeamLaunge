@@ -9,7 +9,7 @@ void playGround::imageInitChanho()
 	//IMAGEMANAGER->addImage("맵", "image/AllStage_front.bmp", 4848, 2304, true, RGB(255,0,255));
 	IMAGEMANAGER->addFrameImage("플레이어대기", "image/player/idle.bmp", 240, 462, 1, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("플레이어대기모션", "image/player/cidleAnimation.bmp", 792, 255, 4, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("플레이어이동", "image/player/move.bmp", 1368, 522, 6, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("플레이어이동", "image/player/move.bmp", 1404, 522, 6, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("플레이어대시", "image/player/dash.bmp", 768, 480, 4, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("플레이어슬라이딩", "image/player/slide.bmp", 306, 462, 1, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("플레이어태클", "image/player/tackle.bmp", 192, 444, 1, 2, true, RGB(255, 0, 255));

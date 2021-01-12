@@ -36,6 +36,7 @@ private:
 	RECT _flyRc;
 	float _groundX; float _groundY; // 땅에 붙는RC
 	RECT _groundRc;
+	RECT _shadow;					//9림자 rc
 	bool _left;						// 왼쪽을 보고 있는지
 	State _enumState;
 	STATE* _statePattern;

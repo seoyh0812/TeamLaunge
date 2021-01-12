@@ -4,6 +4,7 @@
 
 void walk::EnterState()
 {
+	_pl->getIndex() = 0;
 }
 
 void walk::updateState()

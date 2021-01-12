@@ -26,8 +26,9 @@ HRESULT player::init()
 	_flyX = _groundX = 100.f;
 	_flyY = _groundY = CAMY + 300.f;
 	_directionChanged = _directionChangeCount = _dirMemory = _dirMemoryCount = 0;
-	_flyRc = RectMakeCenter(_flyX, _flyY, playerImage->getFrameWidth() / 4, playerImage->getFrameHeight());
-	_groundRc = RectMakeCenter(_groundX, _groundY, playerImage->getFrameWidth() / 4, playerImage->getFrameHeight());
+	_flyRc = RectMakeCenter(_flyX, _flyY, 100, 100);
+	_groundRc = RectMakeCenter(_groundX, _groundY, 100, 100);
+	_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
 	_currentHP = _maxHP = 100.f;
     _jumpPower = 15;
 	_left = false;
@@ -47,8 +48,8 @@ void player::update()
 {
 	_statePattern->updateState();
 	stateUpdate();
-	_flyRc = RectMakeCenter(_flyX, _flyY, playerImage->getFrameWidth() / 4, playerImage->getFrameHeight());
-	_groundRc = RectMakeCenter(_groundX, _groundY, playerImage->getFrameWidth() / 4, playerImage->getFrameHeight());
+	_flyRc = RectMakeCenter(_flyX, _flyY, 100, 100);
+	_groundRc = RectMakeCenter(_groundX, _groundY, 100, 100);
 	minusDirectionChanged();
 	_attack->update(50);
 }
@@ -101,7 +102,16 @@ void player::minusDirectionChanged()
 }
 
 void player::playerRender()
-{	
+{
+	HPEN pen = CreatePen(0, 2, RGB(30, 30, 30));
+	HPEN oldpen = (HPEN)SelectObject(getMemDC(), pen);
+	HBRUSH brush = CreateSolidBrush(RGB(30, 30, 30));
+	HBRUSH oldbrush = (HBRUSH)SelectObject(getMemDC(), brush);
+	Ellipse(getMemDC(), _shadow);
+	SelectObject(getMemDC(), oldbrush);
+	DeleteObject(brush);
+	SelectObject(getMemDC(), oldpen);
+	DeleteObject(pen);
 	stateRender();
 	if(KEYMANAGER->isToggleKey(VK_TAB))
 	{ 
@@ -376,10 +386,28 @@ void player::stateUpdate()
 			else
 			{
 				if (_index >= 1) _index = 0;
+				playerImage->setFrameY(1);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			break;
+		case GRABSWING:
+			playerImage = IMAGEMANAGER->findImage("플레이어잡기공격");
+			if (!_left)
+			{
+				if (_index >= 10) setState(IDLE);
 				playerImage->setFrameY(0);
 				playerImage->setFrameX(_index);
 				_index++;
 			}
+			else
+			{
+				if (_index >= 10) setState(IDLE);
+				playerImage->setFrameY(1);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			break;
 		}
 		_count = 0;
 	}
@@ -392,71 +420,91 @@ void player::stateUpdate()
 void player::stateRender() 
 {
 
+	//이미지 중점용
+
+	float imageCenterX = (((_flyRc.left + _flyRc.right) / 2) - (playerImage->getFrameWidth() / 2));
+	float imageCenterY = (((_flyRc.bottom + _flyRc.top) / 2) - (playerImage->getFrameHeight() / 2));
+
+
 	switch (_enumState)
 	{
 	case IDLE:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 123, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 67, _flyRc.top);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 28, imageCenterY - 66);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 28, imageCenterY - 66);
 		break;
 	case JUMP:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 12);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 12);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200 - ((_groundRc.bottom - _flyRc.bottom)/2), 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 23, imageCenterY - 75);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 23, imageCenterY - 75);
 		break;
 	case WALK:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 115, _flyRc.top - 12);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 77, _flyRc.top - 12);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 125, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 21, imageCenterY - 75);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 21, imageCenterY - 75);
 		break;
 	case RUN:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 3);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 40, _flyRc.top - 3);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
+		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
 		break;
 	case COMBO1:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 62, _flyRc.top + 18);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 164, _flyRc.top + 18);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 65, imageCenterY - 50);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 65, imageCenterY - 50);
 		break;
 	case COMBO11:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top + 9);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top + 9);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 15, imageCenterY - 60);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 15, imageCenterY - 60);
 		break;
 	case COMBO12:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top - 39);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top - 39);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 55, imageCenterY - 105);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 55, imageCenterY - 105);
 		break;
 	case COMBO13:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top - 10);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top - 10);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 70, imageCenterY - 80);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 70, imageCenterY - 80);
 		break;
     case COMBO21:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 90, _flyRc.top - 18);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top - 18);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 35, imageCenterY - 80);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 35, imageCenterY - 80);
         break;
     case COMBO22:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 20, imageCenterY - 65);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 20, imageCenterY - 65);
         break;
     case COMBO23:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top + 12);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top + 12);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 75, imageCenterY - 60);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 75, imageCenterY - 60);
         break;
     case SLIDE:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
+		_shadow = RectMakeCenter(_flyX, _flyRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 40, imageCenterY - 40);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 40, imageCenterY - 40);
         break;
     case TACKLE:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 30, _flyRc.top);
+		_shadow = RectMakeCenter(_flyX, _flyRc.bottom, 150, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 60);
+		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 60);
         break;
     case JUMPATTACK:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top - 12);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top - 12);
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200 - ((_groundRc.bottom - _flyRc.bottom) / 2), 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 60, imageCenterY - 40);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 60, imageCenterY - 40);
         break;
 	case GRAB:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
+		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
 		break;
 	case GRABSWING:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
+		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
 		break;
 	}
 }

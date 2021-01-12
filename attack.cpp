@@ -51,8 +51,8 @@ void attack::Attack(float x, float y)
 	attack.x = attack.attackX = x;
 	attack.y = attack.attackY = y;
 
-	attack.rc = RectMake(attack.x, attack.y, 150, 200); 
-	_attackRect = RectMake(attack.x, attack.y, 150, 200); // 현정_콜리전위해 추가한것1
+	attack.rc = RectMake(attack.x, attack.y, 150, 100); 
+	_attackRect = RectMake(attack.x, attack.y, 150, 100); // 현정_콜리전위해 추가한것1
 
 	_vAttack.push_back(attack);
 }
