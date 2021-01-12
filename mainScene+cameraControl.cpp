@@ -11,6 +11,7 @@ void mainScene::cameraControl()
 	if (CAMY > 55 && CAMX > 2816) CAMERAMANAGER->setCameraX(2816);
 	if (CAMY != 55 && CAMX == 2816 && !_mapChanging)
 	{
+		_pl->getJumpPower() = 0;
 		_tempX = _pl->getGroundX();
 		_mapChanging = true;
 	}
@@ -44,11 +45,11 @@ void mainScene::cameraControl()
 		_pl->setState(JUMP);
 		_pl->getGroundX() = _tempX;
 		_pl->getGroundY() -= 20;
+		_pl->getJumpPower() = 20;
 		_pl->getFlyX() = _tempX;
-		_pl->getFlyY() = _pl->getGroundY() - 200;
+		_pl->getFlyY() = _pl->getGroundY() - 21;
 		if (CAMY < 55)
 		{
-
 			CAMERAMANAGER->setCameraY(55);
 			_mapChanging = false;
 		}

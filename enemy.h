@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 
-enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING, E_WALK2 };
+enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING, E_WALK2, E_SHAKE };
 enum bossState { B_IDLE, B_WALK, B_ATK, B_DEAD, B_HIT, B_GRAB, B_FLYING};
 
 class enemy : public gameNode
