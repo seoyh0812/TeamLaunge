@@ -201,6 +201,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="run.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="cidleAnimation.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="slide.h" />
     <ClInclude Include="soundManager.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="pudding.cpp" />
     <ClCompile Include="run.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="cidleAnimation.cpp" />
     <ClCompile Include="slide.cpp" />
     <ClCompile Include="soundInit.cpp" />
     <ClCompile Include="soundManager.cpp" />

@@ -11,6 +11,7 @@ void Idle::EnterState()
 
 void Idle::updateState()
 {
+	count++;
 	// 상하좌우 키입력을 하면 그걸 잠시 저장해둬.
 	// 30카운트가 지나면 저장한 값은 다시 0으로 초기화돼.
 	// 허나, 30카운트(0.5초)지나기 전 그걸 다시 누르면 걷지 않고 뛰도록 설정해뒀어
@@ -72,9 +73,16 @@ void Idle::updateState()
 	{
 		_pl->setState(JUMP);
 	}
+
+	if (count >= 120) // 카운트가 약 2초가 되면 넘어가게 해줬습니다
+	{
+		_pl->setState(CIDLEANIMATION);
+	}
+
+
 }
 
 void Idle::ExitState()
 {
-
+	count = 0;
 }

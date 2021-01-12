@@ -15,6 +15,7 @@
 #include "jumpAttack.h"
 #include "tackle.h"
 #include "slide.h"
+#include "cidleAnimation.h"
 #include "enemyManager.h"
 // 왜 헤더가 아니냐면 상호참조(상속받고) 날수 있기 때문이라고 함
 // 추가할떈 잊지말고 여기에다 추가
@@ -129,20 +130,21 @@ void player::setState(State state)
 	_enumState = state;
 	switch (state)
 	{ // 스테이트를 바꾸고 그에맞게 상태객체를 만드는 모습이야
-	case IDLE:	_statePattern = new Idle;	break;
-	case JUMP:	_statePattern = new Jump;	break;
-	case WALK:	_statePattern = new walk;	break;
-	case RUN:	_statePattern = new run;	break;
-	case COMBO1: _statePattern = new combo1; break;
-	case COMBO11: _statePattern = new combo11; break;
-	case COMBO12: _statePattern = new combo12; break;
-	case COMBO13: _statePattern = new combo13; break;
-    case COMBO21: _statePattern = new combo21; break;
-    case COMBO22: _statePattern = new combo22; break;
-    case COMBO23: _statePattern = new combo23; break;
-    case JUMPATTACK: _statePattern = new jumpAttack; break;
-    case SLIDE: _statePattern = new slide; break;
-    case TACKLE: _statePattern = new tackle; break;
+	case IDLE:		    _statePattern = new Idle;	break;
+	case CIDLEANIMATION:_statePattern = new cidleAnimation; break;
+	case JUMP:			_statePattern = new Jump;	break;
+	case WALK:			_statePattern = new walk;	break;
+	case RUN:			_statePattern = new run;	break;
+	case COMBO1:		_statePattern = new combo1; break;
+	case COMBO11:		_statePattern = new combo11; break;
+	case COMBO12:		_statePattern = new combo12; break;
+	case COMBO13:		_statePattern = new combo13; break;
+    case COMBO21:		_statePattern = new combo21; break;
+    case COMBO22:		_statePattern = new combo22; break;
+    case COMBO23:		_statePattern = new combo23; break;
+    case JUMPATTACK:	_statePattern = new jumpAttack; break;
+    case SLIDE:			_statePattern = new slide; break;
+    case TACKLE:		_statePattern = new tackle; break;
 	}
 	_statePattern->LinkMemberAdress(this);
 	// 참조할때마다 플레이그라운드에서 링크시켰던거 있잖아?
@@ -167,6 +169,15 @@ void player::stateUpdate()
 			if (!_left) { playerImage->setFrameY(0); }
 			else { playerImage->setFrameY(1); }
 			playerImage->setFrameX(0);
+			break;
+		case CIDLEANIMATION:
+			playerImage = IMAGEMANAGER->findImage("플레이어대기모션");
+			{
+				if (_index >= 4) _index = 0;
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
 			break;
 		case JUMP:
 			playerImage = IMAGEMANAGER->findImage("플레이어점프");
@@ -432,6 +443,11 @@ void player::stateRender()
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
 		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 28, imageCenterY - 66);
 		else playerImage->frameRender(getMemDC(), imageCenterX + 28, imageCenterY - 66);
+		break;
+	case CIDLEANIMATION:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
+		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
 		break;
 	case JUMP:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200 - ((_groundRc.bottom - _flyRc.bottom)/2), 50);

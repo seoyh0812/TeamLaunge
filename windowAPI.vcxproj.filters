@@ -303,6 +303,9 @@
     <ClInclude Include="grabswing.h">
       <Filter>playGround\player\STATE</Filter>
     </ClInclude>
+    <ClInclude Include="cidleAnimation.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -541,6 +544,9 @@
     </ClCompile>
     <ClCompile Include="soundInit.cpp">
       <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="cidleAnimation.cpp">
+      <Filter>playGround\player\STATE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

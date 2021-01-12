@@ -10,6 +10,7 @@ class STATE; // 상호참조시 전방선언 같은거
 
 enum State {
 	IDLE,
+	CIDLEANIMATION,
 	JUMP,
 	WALK,
 	RUN,
