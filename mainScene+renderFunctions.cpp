@@ -16,8 +16,11 @@ void mainScene::zOrderRender()
 	}
 	for (int i = 0; i < _im->getVItem().size(); ++i)
 	{ // 벡터에 객체들의 렉트.바텀값을 추가(푸시백)해줌
-		temp = _im->getVItem()[i]->getRect(); // 이건 아이템들
-		if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);		
+		if (!_im->getVItem()[i]->getPickup())
+		{
+			temp = _im->getVItem()[i]->getRect(); // 이건 아이템들
+			if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);
+		}
 	}
 	temp = _pl->getGroundRc(); // 이건 플레이어
 	bottomY.push_back(temp.bottom);
