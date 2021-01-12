@@ -42,6 +42,6 @@ public:
 	RECT getAttackRect() { return _attackRect; }
 	void removeAttack(int arrNum);
 
-	vector<tagAttack> getVAttack()				{ return _vAttack; }
+	vector<tagAttack> &getVAttack()				{ return _vAttack; }
 	vector<tagAttack>::iterator getViAttack() { return _viAttack; }
 };
