@@ -35,7 +35,7 @@ HRESULT player::init()
 	_left = false;
 	setState(IDLE);
 	_attack = new attack;
-	_attack->init(8, 10);
+	_attack->init(8);
 	//setState(IDLE);
 	_em = new enemyManager;
 	return S_OK;
@@ -223,14 +223,14 @@ void player::stateUpdate()
 			playerImage = IMAGEMANAGER->findImage("플레이어공격");
 			if (!_left)
 			{
-				if (_index >= 9) setState(IDLE);
+				if (_index >= 6) setState(IDLE);
 				playerImage->setFrameY(0);
 				playerImage->setFrameX(_index);
 				_index++;
 			}
 			else
 			{
-				if (_index >= 9) setState(IDLE);
+				if (_index >= 6) setState(IDLE);
 				playerImage->setFrameY(1);
 				playerImage->setFrameX(_index);
 				_index++;
@@ -240,14 +240,14 @@ void player::stateUpdate()
 			playerImage = IMAGEMANAGER->findImage("플레이어공격1-1");
 			if (!_left)
 			{
-				if (_index >= 6) setState(IDLE);
+				if (_index >= 4) setState(IDLE);
 				playerImage->setFrameY(0);
 				playerImage->setFrameX(_index);
 				_index++;
 			}
 			else
 			{
-				if (_index >= 6) setState(IDLE);
+				if (_index >= 4) setState(IDLE);
 				playerImage->setFrameY(1);
 				playerImage->setFrameX(_index);
 				_index++;
@@ -257,14 +257,14 @@ void player::stateUpdate()
 			playerImage = IMAGEMANAGER->findImage("플레이어공격1-2");
 			if (!_left)
 			{
-				if (_index >= 6) setState(IDLE);
+				if (_index >= 4) setState(IDLE);
 				playerImage->setFrameY(0);
 				playerImage->setFrameX(_index);
 				_index++;
 			}
 			else
 			{
-				if (_index >= 6) setState(IDLE);
+				if (_index >= 4) setState(IDLE);
 				playerImage->setFrameY(1);
 				playerImage->setFrameX(_index);
 				_index++;
@@ -274,14 +274,14 @@ void player::stateUpdate()
 			playerImage = IMAGEMANAGER->findImage("플레이어공격1-3");
 			if (!_left)
 			{
-				if (_index >= 6) setState(IDLE);
+				if (_index >= 4) setState(IDLE);
 				playerImage->setFrameY(0);
 				playerImage->setFrameX(_index);
 				_index++;
 			}
 			else
 			{
-				if (_index >= 6) setState(IDLE);
+				if (_index >= 4) setState(IDLE);
 				playerImage->setFrameY(1);
 				playerImage->setFrameX(_index);
 				_index++;
@@ -291,14 +291,14 @@ void player::stateUpdate()
             playerImage = IMAGEMANAGER->findImage("플레이어공격2-1");
             if (!_left)
             {
-                if (_index >= 6) setState(IDLE);
+                if (_index >= 4) setState(IDLE);
                 playerImage->setFrameY(0);
                 playerImage->setFrameX(_index);
                 _index++;
             }
             else
             {
-                if (_index >= 6) setState(IDLE);
+                if (_index >= 4) setState(IDLE);
                 playerImage->setFrameY(1);
                 playerImage->setFrameX(_index);
                 _index++;
@@ -308,14 +308,14 @@ void player::stateUpdate()
             playerImage = IMAGEMANAGER->findImage("플레이어공격2-2");
             if (!_left)
             {
-                if (_index >= 6) setState(IDLE);
+                if (_index >= 4) setState(IDLE);
                 playerImage->setFrameY(0);
                 playerImage->setFrameX(_index);
                 _index++;
             }
             else
             {
-                if (_index >= 6) setState(IDLE);
+                if (_index >= 4) setState(IDLE);
                 playerImage->setFrameY(1);
                 playerImage->setFrameX(_index);
                 _index++;
@@ -325,14 +325,14 @@ void player::stateUpdate()
             playerImage = IMAGEMANAGER->findImage("플레이어공격2-3");
             if (!_left)
             {
-                if (_index >= 9) setState(IDLE);
+                if (_index >= 6) setState(IDLE);
                 playerImage->setFrameY(0);
                 playerImage->setFrameX(_index);
                 _index++;
             }
             else
             {
-                if (_index >= 9) setState(IDLE);
+                if (_index >= 6) setState(IDLE);
                 playerImage->setFrameY(1);
                 playerImage->setFrameX(_index);
                 _index++;

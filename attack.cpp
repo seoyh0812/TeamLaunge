@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "attack.h"
 
-HRESULT attack::init(int attackMax, int count)
+HRESULT attack::init(int attackMax)
 {
 	_attackMax = attackMax;
-	_count = count;
+	_count = 20;
 	return S_OK;
 }
 
@@ -22,7 +22,7 @@ void attack::update(int count)
 		if (_count <= 0)
 		{
 			_viAttack = _vAttack.erase(_viAttack);
-			_count = count;
+            _count = 20;
 		}
 		else ++_viAttack;
 	}
