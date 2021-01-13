@@ -43,12 +43,22 @@ void mainScene::zOrderRender()
 		if (_pl->getGroundRc().bottom == bottomY[i])
 		{ // 내가 찾는 바텀값과 동일한지?
 			_pl->playerRender(); // 그렇다면 렌더
+			for (int j = 0; j < _im->getVItem().size(); j++)
+			{
+				if (!_im->getVItem()[j]->getPickup())continue;
+				if (_im->getVItem()[j]->getPickup())_im->getVItem()[j]->render();
+			}
 		}
 		for (int j = 0; j < _em->getVEnemy().size(); ++j)
 		{
 			if (_em->getVEnemy()[j]->getRect().bottom == bottomY[i])
 			{
 				_em->getVEnemy()[j]->render();
+				for (int j = 0; j < _im->getVItem().size(); j++)
+				{
+					if (!_im->getVItem()[j]->getMoving())continue;
+					if (_im->getVItem()[j]->getMoving())_im->getVItem()[j]->render();
+				}
 			}
 		}
 		for (int j = 0; j < _im->getVItem().size(); ++j)
