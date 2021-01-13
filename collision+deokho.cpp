@@ -65,6 +65,7 @@ void collision::deokhoUpdate()
 						_em->getVEnemy()[j]->setState(E_DEAD);
 						_im->getVItem()[i]->makeBoom();
 					}
+					
 				}
 			}
 		}

@@ -42,6 +42,7 @@ void collision::hyunjungUpdate()
 						_im->createFood(cenX, cenY, src.bottom);
 					}
 				}
+				if(_sm->getVObject()[i]->getId()==0)SOUNDMANAGER->play("의자부수는소리");
 				_sm->removeObject(i);
 			}
 		}
