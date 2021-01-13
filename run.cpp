@@ -4,6 +4,7 @@
 
 void run::EnterState()
 {
+    _pl->getIndex() = 0;
 }
 
 void run::updateState()

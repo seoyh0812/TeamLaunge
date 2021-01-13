@@ -24,4 +24,6 @@ void playGround::imageInitChanho()
 	IMAGEMANAGER->addFrameImage("플레이어점프공격", "image/player/jumpAttack.bmp", 588, 750, 2, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("플레이어잡기", "image/player/grab.bmp", 210, 444, 1, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("플레이어잡기공격", "image/player/grabswing.bmp", 2520, 522, 7, 2, true, RGB(255, 0, 255));
+    IMAGEMANAGER->addFrameImage("플레이어히트", "image/player/hit.bmp", 285, 426, 1, 2, true, RGB(255, 0, 255));
+    IMAGEMANAGER->addFrameImage("윈드밀", "image/player/windmill.bmp", 864, 564, 3, 2, true, RGB(255, 0, 255));
 }

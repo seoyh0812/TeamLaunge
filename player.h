@@ -17,6 +17,7 @@ enum State {
     SLIDE,
     TACKLE,
     JUMPATTACK,
+    HIT,
 	COMBO1,
 	COMBO11,
 	COMBO12,
@@ -25,7 +26,8 @@ enum State {
     COMBO22,
     COMBO23,
 	GRAB,
-	GRABSWING
+	GRABSWING,
+    WINDMILL
 };
 
 class player :
@@ -47,6 +49,7 @@ private:
 	attack* _attack;
 	int _count, _index; //프레임 이미지 재생용 카운트, 인덱스.
     float _jumpPower; // 점프 파워
+    bool _isHit;
 
 	// ############ 커맨드 입력 관련 변수(대시, 특수기) #############
 	int _directionChanged;		// 좌우가 몇번 바뀌었는지 카운트(커맨드)
@@ -84,10 +87,13 @@ public:
 	bool& getLeft() { return _left; }
 	State& getEnumState() { return _enumState; }
 	void plusDirectionChanged() { ++_directionChanged; }
+    int& getDirectionChanged() {return _directionChanged; }
 	int& getDirMemory() {return _dirMemory;}
 	void setLinkEnemy(enemyManager* em) { _em = em; }
 	attack* getAttack() { return _attack; }
 	int& getIndex() { return _index; }
     float& getJumpPower() { return _jumpPower; }
+    bool& getIsHit() { return _isHit; }
+    float& getCurrentHP() { return _currentHP; }
 };
 

@@ -5,6 +5,7 @@
 #include "Jump.h"
 #include "walk.h"
 #include "run.h"
+#include "hit.h"
 #include "combo1.h"
 #include "combo11.h"
 #include "combo12.h"
@@ -16,6 +17,7 @@
 #include "tackle.h"
 #include "slide.h"
 #include "cidleAnimation.h"
+#include "windmill.h"
 #include "enemyManager.h"
 // 왜 헤더가 아니냐면 상호참조(상속받고) 날수 있기 때문이라고 함
 // 추가할떈 잊지말고 여기에다 추가
@@ -36,6 +38,7 @@ HRESULT player::init()
 	setState(IDLE);
 	_attack = new attack;
 	_attack->init(8);
+    _isHit = false;
 	//setState(IDLE);
 	_em = new enemyManager;
 	return S_OK;
@@ -82,9 +85,9 @@ void player::minusDirectionChanged()
 {
 	if (_directionChanged > 0) // 방향전환이 일어났다면
 	{
-		if (_directionChanged > 2) _directionChanged = 2; // 방향전환 2번 넘으면 2번으로 해주고
+		if (_directionChanged >= 2) _directionChanged = 2; // 방향전환 2번 넘으면 2번으로 해주고
 		++_directionChangeCount; // 카운트센다
-		if (_directionChangeCount > 30) // 30(0.5초) 이상 지났다면
+		if (_directionChangeCount > 45) // 30(0.5초) 이상 지났다면
 		{
 			_directionChangeCount = 0; // 카운트 0으로 돌리고
 			--_directionChanged; // 방향전환 줄여줌
@@ -135,6 +138,7 @@ void player::setState(State state)
 	case JUMP:			_statePattern = new Jump;	break;
 	case WALK:			_statePattern = new walk;	break;
 	case RUN:			_statePattern = new run;	break;
+    case HIT:           _statePattern = new hit;    break;
 	case COMBO1:		_statePattern = new combo1; break;
 	case COMBO11:		_statePattern = new combo11; break;
 	case COMBO12:		_statePattern = new combo12; break;
@@ -145,6 +149,7 @@ void player::setState(State state)
     case JUMPATTACK:	_statePattern = new jumpAttack; break;
     case SLIDE:			_statePattern = new slide; break;
     case TACKLE:		_statePattern = new tackle; break;
+    case WINDMILL:      _statePattern = new windmill; break;
 	}
 	_statePattern->LinkMemberAdress(this);
 	// 참조할때마다 플레이그라운드에서 링크시켰던거 있잖아?
@@ -219,6 +224,13 @@ void player::stateUpdate()
 				_index--;
 			}
 			break;
+        case HIT:
+            playerImage = IMAGEMANAGER->findImage("플레이어히트");
+            if (!_left) { playerImage->setFrameY(0); }
+            else { playerImage->setFrameY(1); }
+            playerImage->setFrameX(_index);
+            _index++;
+            break;
 		case COMBO1:
 			playerImage = IMAGEMANAGER->findImage("플레이어공격");
 			if (!_left)
@@ -419,6 +431,23 @@ void player::stateUpdate()
 				_index++;
 			}
 			break;
+        case WINDMILL:
+            playerImage = IMAGEMANAGER->findImage("윈드밀");
+            if (!_left)
+            {
+                if (_index >= 6) setState(IDLE);
+                playerImage->setFrameY(0);
+                playerImage->setFrameX(_index);
+                _index++;
+            }
+            else
+            {
+                if (_index >= 6) setState(IDLE);
+                playerImage->setFrameY(1);
+                playerImage->setFrameX(_index);
+                _index++;
+            }
+            break;
 		}
 		_count = 0;
 	}
@@ -464,6 +493,11 @@ void player::stateRender()
 		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
 		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
 		break;
+    case HIT:
+        _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+        if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
+        else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
+        break;
 	case COMBO1:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
 		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 65, imageCenterY - 50);
@@ -522,5 +556,11 @@ void player::stateRender()
 		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
 		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
 		break;
+    case WINDMILL:
+        _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 125, 50);
+        if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 90);
+        else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 90);
+        break;
+
 	}
 }

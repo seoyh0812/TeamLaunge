@@ -64,6 +64,11 @@ void Idle::updateState()
 		}
 	}
 
+    if (_pl->getDirectionChanged() >= 2 && KEYMANAGER->isOnceKeyDown('Z'))
+    {
+        _pl->setState(WINDMILL);
+    }
+
 	if (KEYMANAGER->isOnceKeyDown('Z'))
 	{
 		_pl->setState(COMBO1);
