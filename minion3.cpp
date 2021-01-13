@@ -43,14 +43,13 @@ void minion3::enemyState()
 			//에너미는 왼쪽을 보고있다고 설정해주고 WALK상태로 변경 후 
 			//애니메이션을 처음부터 처리하기위해 인덱스를 0으로 초기화
 			_left = true;
-			if((getDistance(_x, _y, _pX, _pY) > 200)) _state = E_WALK;
+			if((getDistance(_x, _y, _pX, _pY) > 200)) setState(E_WALK);
 			else
 			{
 				_attackCount++;
 				if (_attackCount > 45)
 				{
-					_state = E_ATK;
-					_index = 0;
+					setState(E_ATK);
 					_attackCount = 0;
 				}
 			}
@@ -60,14 +59,13 @@ void minion3::enemyState()
 		{
 			//엘스로 오른쪽도 설정
 			_left = false;
-			if ((getDistance(_x, _y, _pX, _pY) > 200)) _state = E_WALK;
+			if ((getDistance(_x, _y, _pX, _pY) > 200)) setState(E_WALK);
 			else
 			{
 				_attackCount++;
 				if (_attackCount > 45)
 				{
-					_state = E_ATK;
-					_index = 0;
+					setState(E_ATK);
 					_attackCount = 0;
 				}
 			}
@@ -85,8 +83,7 @@ void minion3::enemyState()
 			_attackCount++;
 			if (_attackCount > 45)
 			{
-				_state = E_ATK;
-				_index = 0;
+				setState(E_ATK);
 				_attackCount = 0;
 			}
 		}
@@ -112,10 +109,20 @@ void minion3::enemyState()
 		break;
 
 	case E_ATK:
+
+		if (_left)
+		{
+			_attackRc = RectMakeCenter(_x - 130, _y, 150, 60);
+		}
+		else
+		{
+			_attackRc = RectMakeCenter(_x + 130, _y, 150, 60);
+		}
+
 		if (_index > 2)
 		{
-			_state = E_IDLE;
-			_index = 0;
+			_attackRc = RectMakeCenter(0, 0, 0, 0);
+			setState(E_IDLE);
 		}
 		break;
 
@@ -128,17 +135,29 @@ void minion3::enemyState()
 		//피격모션 유지시간 (30 = 0.5초)
 		if (_hitCount > 30)
 		{
-			_state = E_IDLE;
+			setState(E_IDLE);
 			_hitCount = 0;
 		}
 		break;
 
 	case E_GRAB:
 		_index = 0;
+
+		if (_left)
+		{
+			_x = _pX + 150;
+			_y = _pY + 10;
+		}
+		else
+		{
+			_x = _pX - 150;
+			_y = _pY + 10;
+		}
+
 		//그랩모션 유지시간 (90 = 1.5초)
 		if (_grabCount > 90)
 		{
-			_state = E_IDLE;
+			setState(E_IDLE);
 			_grabCount = 0;
 		}
 		break;
@@ -149,7 +168,7 @@ void minion3::enemyState()
 		if (_rc.right > CAMX + WINSIZEX && _flying && _left)
 		{
 			_flying = false;
-			_state = E_IDLE;
+			setState(E_IDLE);
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
 			_x -= 5;
 		}
@@ -157,7 +176,7 @@ void minion3::enemyState()
 		if (_rc.left < CAMX && _flying && !_left)
 		{
 			_flying = false;
-			_state = E_IDLE;
+			setState(E_IDLE);
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
 			_x += 5;
 		}
@@ -219,7 +238,7 @@ HRESULT minion3::init(float x, float y)
 	_x = CAMX + x;	_y = CAMY + y;
 	_currentHP = _maxHP = 100;
 	_count = _index = _attackCount = _hitCount = _grabCount = 0;
-	_state = E_IDLE;
+	setState(E_IDLE);
 	_left = true;
 	_flying = false;
 	_isDead = false;
@@ -248,7 +267,11 @@ void minion3::render()
 {
 	fillColorEllipse(40, 40, 40, _shadow);
 	enemyStateRender();
-	if (KEYMANAGER->isToggleKey(VK_F1)) Rectangle(getMemDC(), _rc);
+	if (KEYMANAGER->isToggleKey(VK_F1))
+	{
+		Rectangle(getMemDC(), _rc);
+		Rectangle(getMemDC(), _attackRc);
+	}
 }
 
 

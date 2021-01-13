@@ -94,6 +94,6 @@ public:
 	int& getIndex() { return _index; }
     float& getJumpPower() { return _jumpPower; }
     bool& getIsHit() { return _isHit; }
-    float& getCurrentHP() { return _currentHP; }
+    float& getPlHP() { return _currentHP; }
 };
 

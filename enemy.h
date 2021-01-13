@@ -7,6 +7,7 @@ class enemy : public gameNode
 {
 protected:
 	RECT _rc;
+	RECT _attackRc;
 	float _x; float _y; // 중점. RectMakeCenter를 이용하기로 함
 	float _currentHP; float _maxHP;
 
@@ -44,8 +45,12 @@ public:
 	// 공통적으로 쓰이는 함수는 다 여기다 하면 돼
 	RECT& getRect() { return _rc; }
 	RECT& getShadow() { return _shadow; }
+	RECT& getAtkRc() { return _attackRc; }
 	float& getHp() { return _currentHP; }
 	bool& getIsDead() { return _isDead; }
 	enemyState& getState() { return _state; }
 	void setPlayerPt(float x, float y) { _pX = x; _pY = y; }
+	void getDamage(int x) { _currentHP -= x; }
+	void setState(enemyState state);
+	float getY() { return _y; }
 };
