@@ -78,6 +78,7 @@ public:
 	void stateRender();
 	RECT getGroundRc() { return _groundRc; }
 	RECT getFlyRc() { return _flyRc; }
+    RECT getShadow() { return _shadow; }
 	float& getGroundX() { return _groundX; }float& getGroundY() { return _groundY; }
 	float& getFlyX() { return _flyX; }		float& getFlyY() { return _flyY; }
 	bool& getLeft() { return _left; }

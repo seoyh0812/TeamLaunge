@@ -35,7 +35,7 @@ HRESULT player::init()
 	_left = false;
 	setState(IDLE);
 	_attack = new attack;
-	_attack->init(8, 50);
+	_attack->init(8, 10);
 	//setState(IDLE);
 	_em = new enemyManager;
 	return S_OK;
