@@ -14,11 +14,10 @@ HRESULT trashCan::init(float x, float y)
 	_x = x; _y = y;
 	_id = 1; // 부여받은 id ()
 	_rc = RectMakeCenter(_x, _y, 110, 150);
-	_trashRect = RectMakeCenter(_x, _y, 110, 150);
 	_img = IMAGEMANAGER->findImage("쓰레기통");
 	_isFire = true;
 
-	_trashCanShadowRect = RectMakeCenter(_x, _rc.bottom - 10, 110, 30);
+	_shadow = RectMakeCenter(_x, _rc.bottom - 10, 110, 30);
 	return S_OK;
 }
 
@@ -33,7 +32,7 @@ void trashCan::update()
 void trashCan::render()
 {
 
-	shadowRender(_trashCanShadowRect);
+	shadowRender(_shadow);
 
 	//	Rectangle(getMemDC(), _rc);
 	_img->render(getMemDC(), _rc.left, _rc.top);

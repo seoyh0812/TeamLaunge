@@ -6,9 +6,7 @@ class chair :public object
 private:
 
 	image* _img;
-	RECT _chairRect;
-	RECT _chairShadow;
-
+	
 
 public:
 	chair();
@@ -23,8 +21,6 @@ public:
 
 	image* getChairImg() { return _img; }
 
-	RECT getShadow() { return _chairShadow; }
-	RECT getChairRect() { return _chairRect; }
 
 };
 
