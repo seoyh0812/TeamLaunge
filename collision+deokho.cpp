@@ -18,8 +18,10 @@ void collision::deokhoUpdate()
 				if (_im->getVItem()[i]->isFood()) //먹을 거임.
 				{
 					SOUNDMANAGER->play("먹는소리");
+					EFFECTMANAGER->play("라이프업", _im->getVItem()[i]->getRect().left, _im->getVItem()[i]->getRect().top - 150);
 					_im->getVItem()[i]->setHold();
-                    _pl->getPlHP() += 30.0f;
+					_pl->getPlHP() += 30.0f;
+					if (_pl->getPlHP() > 100) _pl->getPlHP() = 100.0f;
 				}
 
 				if (!_im->getVItem()[i]->isFood())
@@ -52,14 +54,15 @@ void collision::deokhoUpdate()
 				{//충돌했니?
 					if (_im->getVItem()[i]->getID() == 1)
 					{//야구공이니?
-						SOUNDMANAGER->play("타격2");
-						if (_im->getVItem()[i]->getDirection()) _im->getVItem()[i]->makeInflect(+1.5f);
+						if(_em->getVEnemy()[j]->getState()!=E_HIT) SOUNDMANAGER->play("타격2");
+						_em->getVEnemy()[j]->setState(E_HIT);
+						if (_im->getVItem()[i]->getDirection()) _im->getVItem()[i]->makeInflect(-1.5f);
 						//오른쪽으로 던져졌니?
-						else _im->getVItem()[i]->makeInflect(1.5f);
+						else _im->getVItem()[i]->makeInflect(-1.5f);
 					}
 					if (_im->getVItem()[i]->getID() == 2)
 					{
-						
+						_em->getVEnemy()[j]->setState(E_DEAD);
 						_im->getVItem()[i]->makeBoom();
 					}
 				}
