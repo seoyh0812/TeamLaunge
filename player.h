@@ -49,7 +49,8 @@ private:
 	attack* _attack;
 	int _count, _index; //프레임 이미지 재생용 카운트, 인덱스.
     float _jumpPower; // 점프 파워
-    bool _isHit;
+    bool _isHit;        //맞았는지, 잡았는지 불바다
+    bool _isGrab;
 
 	// ############ 커맨드 입력 관련 변수(대시, 특수기) #############
 	int _directionChanged;		// 좌우가 몇번 바뀌었는지 카운트(커맨드)
@@ -94,6 +95,8 @@ public:
 	int& getIndex() { return _index; }
     float& getJumpPower() { return _jumpPower; }
     bool& getIsHit() { return _isHit; }
+    bool& getIsGrab() { return _isGrab; }
     float& getPlHP() { return _currentHP; }
+    void getDamage(int x) { _currentHP -= x; }
 };
 

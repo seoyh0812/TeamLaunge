@@ -95,11 +95,11 @@ void mainScene::uiRender()
 	if (_score > 999)	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 287, CAMY + 29, _score / 1000 % 10, 0);
 	if (_score > 9999)	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 263, CAMY + 29, _score / 10000 % 10, 0);
 
-	// _playerHpRatio = _pl->getCurrentHp()/100.f;
-	// _bossHpRatio = _em->;
+	_playerHpRatio = _pl->getPlHP()/100.f;
+	//_bossHpRatio = _em->;
 
-	if (_playerHpRatio > 0) _playerHpRatio -= 0.01f;
-	else _playerHpRatio = 1.f; // 확인용
+	//if (_playerHpRatio > 0) _playerHpRatio -= 0.01f;
+	//else _playerHpRatio = 1.f; // 확인용
 
 	if (_playerHpRatio < 0.3f)
 	{

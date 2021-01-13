@@ -18,6 +18,8 @@
 #include "slide.h"
 #include "cidleAnimation.h"
 #include "windmill.h"
+#include "grab.h"
+#include "grabswing.h"
 #include "enemyManager.h"
 // 왜 헤더가 아니냐면 상호참조(상속받고) 날수 있기 때문이라고 함
 // 추가할떈 잊지말고 여기에다 추가
@@ -39,6 +41,7 @@ HRESULT player::init()
 	_attack = new attack;
 	_attack->init(8);
     _isHit = false;
+    _isGrab = false;
 	//setState(IDLE);
 	_em = new enemyManager;
 	return S_OK;
@@ -150,6 +153,8 @@ void player::setState(State state)
     case SLIDE:			_statePattern = new slide; break;
     case TACKLE:		_statePattern = new tackle; break;
     case WINDMILL:      _statePattern = new windmill; break;
+    case GRAB:          _statePattern = new grab; break;
+    case GRABSWING:     _statePattern = new grabswing; break;
 	}
 	_statePattern->LinkMemberAdress(this);
 	// 참조할때마다 플레이그라운드에서 링크시켰던거 있잖아?
@@ -494,9 +499,9 @@ void player::stateRender()
 		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
 		break;
     case HIT:
-        _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
-        if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
-        else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
+        _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+        if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 15, imageCenterY - 60);
+        else playerImage->frameRender(getMemDC(), imageCenterX + 15, imageCenterY - 60);
         break;
 	case COMBO1:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
@@ -549,12 +554,14 @@ void player::stateRender()
 		else playerImage->frameRender(getMemDC(), imageCenterX - 60, imageCenterY - 40);
         break;
 	case GRAB:
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
-		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
+        _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 23, imageCenterY - 60);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 23, imageCenterY - 60);
 		break;
 	case GRABSWING:
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
-		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY);
+        _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 60, imageCenterY - 80);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 60, imageCenterY - 80);
 		break;
     case WINDMILL:
         _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 125, 50);

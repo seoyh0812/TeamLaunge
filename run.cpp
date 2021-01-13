@@ -36,6 +36,12 @@ void run::updateState()
 	{
 		_pl->getFlyY() += 8;	_pl->getGroundY() += 8;
 	}
+
+    if (_pl->getIsGrab())
+    {
+        _pl->setState(GRAB);
+    }
+
     if (KEYMANAGER->isOnceKeyDown('Z'))
     {
         _pl->setState(SLIDE);

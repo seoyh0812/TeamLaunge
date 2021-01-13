@@ -41,6 +41,11 @@ void walk::updateState()
         _pl->setState(WINDMILL);
     }
 
+    if (_pl->getIsGrab())
+    {
+        _pl->setState(GRAB);
+    }
+
     if (KEYMANAGER->isOnceKeyDown('Z'))
     {
         _pl->setState(COMBO1);

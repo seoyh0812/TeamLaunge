@@ -19,6 +19,7 @@ void collision::deokhoUpdate()
 				{
 					SOUNDMANAGER->play("¸Ô´Â¼Ò¸®");
 					_im->getVItem()[i]->setHold();
+                    _pl->getPlHP() += 30.0f;
 				}
 
 				if (!_im->getVItem()[i]->isFood())

@@ -4,7 +4,7 @@
 
 void grabswing::EnterState()
 {
-
+    _pl->getIndex() = 0;
 }
 
 void grabswing::updateState()
@@ -18,5 +18,4 @@ void grabswing::updateState()
 
 void grabswing::ExitState()
 {
-	_pl->getIndex() = 0;
 }

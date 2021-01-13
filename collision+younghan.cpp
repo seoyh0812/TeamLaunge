@@ -30,7 +30,7 @@ void collision::younghanUpdate()
 
 		for (int i = 0; i < _em->getVEnemy().size(); ++i)
 		{
-			if (_pl->getEnumState() == GRAB) break;
+			if (_pl->getIsGrab()) break;
 			RECT temp;
 			if (IntersectRect(&temp, &_pl->getFlyRc(), &_em->getVEnemy()[i]->getRect()))
 			{
@@ -38,7 +38,7 @@ void collision::younghanUpdate()
 					&& _pl->getFlyY() - _em->getVEnemy()[i]->getY() > - 15)
 				{
 					_em->getVEnemy()[i]->setState(E_GRAB);
-					_pl->setState(GRAB);
+					_pl->getIsGrab() = true;
 					break;
 				}
 			}
@@ -47,12 +47,11 @@ void collision::younghanUpdate()
 
 	for (int i = 0; i < _em->getVEnemy().size(); ++i)
 	{
-		if (_pl->getEnumState() == HIT) break;
+		if (_pl->getIsHit()) break;
 		RECT temp;
 		if (IntersectRect(&temp, &_pl->getFlyRc(), &_em->getVEnemy()[i]->getAtkRc()))
 		{
-			_pl->setState(HIT);
-			_pl->getPlHP() -= 10.0f;
+            _pl->getIsHit() = true;
 			_em->getVEnemy()[i]->getAtkRc() = RectMake(0, 0, 0, 0);
 			break;
 		}
