@@ -7,6 +7,7 @@ private:
 
 	image* _img;
 	RECT _trashRect;
+	RECT _trashCanShadowRect;
 
 public:
 	trashCan();
@@ -19,5 +20,7 @@ public:
 
 	image* getTrashCanImg() { return _img; }
 	RECT getTrashCanRect() { return _trashRect; }
+	inline RECT getShadow() { return _trashCanShadowRect; }
+	void shadowRender(RECT rc);
 };
 
