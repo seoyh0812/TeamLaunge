@@ -15,6 +15,8 @@ void boss::bossState()
 	if (_state == E_HIT) _hitCount++;
 	//GRAB상태에서만 grab카운트가 더해진다
 	if (_state == E_GRAB) _grabCount++;
+	//DEAD상태에서만 dead카운트가 더해진다
+	if (_state == E_DEAD) _deadCount++;
 
 	//공격범위 안에 플레이어가 있는지 체크함, 플레이어와 에너미의 간격이 100미만이면 true
 	if (getDistance(_x, _y, _pX, _pY) < 100) _atkArea = true;
@@ -22,8 +24,9 @@ void boss::bossState()
 	if (getDistance(_x, _y, _pX, _pY) >= 100) _atkArea = false;
 
 
-	if (_phaseCount > 300) // 페이즈 바꿈
+	if (_phaseCount > 300 && _state != E_GRAB) // 페이즈 바꿈
 	{
+		_attackRc = { 0,0,0,0 };
 		_phase = 1 + rand() % 2;
 		_destX = _pX;	_destY = _pY; // 목적지설정
 		_jumping = true;
@@ -40,9 +43,9 @@ void boss::bossState()
 	case E_SHAKE:
 		if (_index > 2)
 		{
-			if (_shakeCount > 3)
+			if (_shakeCount > 2)
 			{
-				_state = E_WALK;
+				setState(E_WALK);
 				_index = 3;
 				break;
 			}
@@ -63,15 +66,13 @@ void boss::bossState()
 				//에너미는 왼쪽을 보고있다고 설정해주고 WALK상태로 변경 후 
 				//애니메이션을 처음부터 처리하기위해 인덱스를 0으로 초기화
 				_left = true;
-				_state = E_WALK;
-				_index = 0;
+				setState(E_WALK);
 			}
 			else
 			{
 				//엘스로 오른쪽도 설정
 				_left = false;
-				_state = E_WALK;
-				_index = 0;
+				setState(E_WALK);
 			}
 		}
 		else
@@ -79,8 +80,7 @@ void boss::bossState()
 			_attackCount++;
 			if (_attackCount > 45)
 			{
-				_state = E_ATK;
-				_index = 0;
+				setState(E_ATK);
 				_attackCount = 0;
 			}
 		}
@@ -100,8 +100,7 @@ void boss::bossState()
 			_attackCount++;
 			if (_attackCount > 45)
 			{
-				_state = E_ATK;
-				_index = 0;
+				setState(E_ATK);
 				_attackCount = 0;
 			}
 		}
@@ -109,8 +108,7 @@ void boss::bossState()
 		//이미지를 처음부터 렌더하기위해 인덱스 초기화
 		if (getDistance(_x, _y, _pX, _pY) >= 450)
 		{
-			_state = E_WALK2;
-			_index = 0;
+			setState(E_WALK2);
 		}
 		//플레이어와 에너미의 거리가 450미만이고
 		if (getDistance(_x, _y, _pX, _pY) < 450)
@@ -121,8 +119,8 @@ void boss::bossState()
 				_left = true; //에너미는 왼쪽을바라보고
 				if (!_atkArea) //플레이어의 아래좌표까지 따라간다
 				{
-					_x += 2.7f * cosf(getAngle(_x, _y, _pX + 90, _pY));
-					_y -= 2.7f * sinf(getAngle(_x, _y, _pX + 90, _pY));
+					_x += 4.f * cosf(getAngle(_x, _y, _pX + 90, _pY));
+					_y -= 4.f * sinf(getAngle(_x, _y, _pX + 90, _pY));
 				}
 			}
 			else
@@ -130,8 +128,8 @@ void boss::bossState()
 				_left = false; //에너미는 오른쪽을 바라보고
 				if (!_atkArea) //플레이어의 아래좌표까지 따라간다
 				{
-					_x += 2.7f * cosf(getAngle(_x, _y, _pX - 90, _pY));
-					_y -= 2.7f * sinf(getAngle(_x, _y, _pX - 90, _pY));
+					_x += 4.f * cosf(getAngle(_x, _y, _pX - 90, _pY));
+					_y -= 4.f * sinf(getAngle(_x, _y, _pX - 90, _pY));
 				}
 			}
 		}
@@ -144,8 +142,7 @@ void boss::bossState()
 		//프레임 이미지 정상 렌더를 위해 인덱스 초기화
 		if (getDistance(_x, _y, _pX, _pY) < 450)
 		{
-			_state = E_WALK;
-			_index = 0;
+			setState(E_WALK);
 		}
 		//플레이어가 에너미의
 		if (_x > _pX) //오른쪽에 있다면
@@ -153,8 +150,8 @@ void boss::bossState()
 			_left = true; //에너미는 왼쪽을 바라보고
 			if (!_atkArea) //플레이어의 아래좌표까지 이동한다
 			{
-				_x += 4.f * cosf(getAngle(_x, _y, _pX + 100, _pY));
-				_y -= 4.f * sinf(getAngle(_x, _y, _pX + 100, _pY));
+				_x += 8.f * cosf(getAngle(_x, _y, _pX + 100, _pY));
+				_y -= 8.f * sinf(getAngle(_x, _y, _pX + 100, _pY));
 			}
 		}
 		else //왼쪽에 있다면
@@ -162,34 +159,53 @@ void boss::bossState()
 			_left = false; //에너미는 오른쪽을 바라보고
 			if (!_atkArea) //플레이어의 아래좌표까지 이동한다.
 			{
-				_x += 4.f * cosf(getAngle(_x, _y, _pX - 100, _pY));
-				_y -= 4.f * sinf(getAngle(_x, _y, _pX - 100, _pY));
+				_x += 8.f * cosf(getAngle(_x, _y, _pX - 100, _pY));
+				_y -= 8.f * sinf(getAngle(_x, _y, _pX - 100, _pY));
 			}
 		}
 		break;
 
 	case E_ATK:
+		if (_left)
+		{
+			_attackRc = RectMakeCenter(_x - 110, _y - 45, 120, 80);
+		}
+		else
+		{
+			_attackRc = RectMakeCenter(_x + 110, _y - 45, 120, 80);
+		}
 		if (_index > 2)
 		{
-			_state = E_WALK;
-			_index = 0;
+			_attackRc = RectMakeCenter(0, 0, 0, 0);
+			setState(E_IDLE);
 		}
 		break;
 
 	case E_DEAD:
-		if (_index > 3)
+		if (_index >= 3)
 		{
 			_index = 3;
+		}
+		else
+		{
+			if (_left) _x += 1;
+			else _x -= 1;
 		}
 		break;
 
 	case E_HIT:
 		_index = 0;
+
+		if (_currentHP <= 0)
+		{
+			setState(E_DEAD);
+		}
+
 		//피격모션 유지시간 (30 = 0.5초)
 		//0.5초가 지나면 IDLE상태로 변경됨
-		if (_hitCount > 30)
+		if (_hitCount > 30 && _currentHP > 0)
 		{
-			_state = E_WALK;
+			setState(E_IDLE);
 			_hitCount = 0;
 		}
 		break;
@@ -197,19 +213,36 @@ void boss::bossState()
 	case E_GRAB:
 		_index = 0;
 
+		if (_left)
+		{
+			_x = _pX + 150;
+			_y = _pY + 10;
+		}
+		else
+		{
+			_x = _pX - 150;
+			_y = _pY + 10;
+		}
+
 		//그랩모션 유지시간 (90 = 1.5초)
 		//1.5초가 지나면 IDLE상태로 변경됨
 		if (_grabCount > 90)
 		{
-			_state = E_IDLE;
+			setState(E_IDLE);
 			_grabCount = 0;
 		}
 		break;
 
 	case E_FLYING:
 		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
+		if (_flying) _index = 0;
+
+		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
 		if (_rc.right > CAMX + WINSIZEX && _flying && _left)
 		{
+			if (_currentHP <= 0) setState(E_DEAD);
+			else _currentHP -= 20;
+
 			_flying = false;
 			_index = 1;
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
@@ -218,6 +251,9 @@ void boss::bossState()
 		//몬스터 렉트의 레프트가 카메라 화면 왼쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
 		if (_rc.left < CAMX && _flying && !_left)
 		{
+			if (_currentHP <= 0) setState(E_DEAD);
+			else _currentHP -= 20;
+
 			_flying = false;
 			_index = 1;
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
@@ -231,8 +267,7 @@ void boss::bossState()
 		//이미지가 정상적으로 마지막까지 렌더된다면 IDLE상태로 변경시키고 인덱스를 초기화
 		if (_index > 3)
 		{
-			_state = E_WALK;
-			_index = 0;
+			setState(E_IDLE);
 		}
 		break;
 	}
@@ -244,11 +279,13 @@ void boss::phase1() // 공격렉트가 전신에 생겨서 치고다님
 	{
 		_x += 10.f * cosf(getAngle(_x, _y, _destX, _destY));
 		_y -= 10.f * sinf(getAngle(_x, _y, _destX, _destY));
+		_attackRc = RectMakeCenter(_x, _y+100, 300, 100);
 	}
 	else
 	{
+		_attackRc = { 0,0,0,0 };
 		++_rideCount;
-		if (_rideCount > 100)
+		if (_rideCount > 80)
 		{
 			_rideCount = 0;
 			_destX = _pX;
@@ -261,6 +298,7 @@ void boss::phase1() // 공격렉트가 전신에 생겨서 치고다님
 	{
 		_phaseCount = 0; _phase = 0; _index = _rideCount = 0;
 		_state = E_IDLE;
+		_attackRc = { 0,0,0,0 };
 	}
 
 
@@ -274,6 +312,7 @@ void boss::phase2()
 { 
 	if (_jumping)
 	{ // 점프중
+		_attackRc = { 0,0,0,0 };
 		_y -= 20;
 		if (_destY - _y > WINSIZEY)
 		{
@@ -285,12 +324,14 @@ void boss::phase2()
 	}
 	else if (_destY > _rc.bottom)
 	{ // 착지
+		_attackRc = RectMakeCenter(_x, _y + 70, 180, 60);
 		_y += 20;
 	}
 	else if (_destY <= _rc.bottom)
 	{ // 착지후 쉐이킹
-		_phaseCount = 0; _phase = 0; _index = _shakeCount = 0;
-		_state = E_SHAKE;
+		_phaseCount = _phase = _shakeCount = 0;
+		setState(E_SHAKE);
+		_attackRc = { 0,0,0,0 };
 		return;
 	}
 
@@ -407,8 +448,17 @@ void boss::render()
 				else FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0);	break;
 			}
 		case E_GRAB:
-			if (_left) FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left-5, _rc.top, _index, 1);
-			else FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left-3, _rc.top, _index, 0); break;
+
+			if (_plAtkNum == 1)
+			{
+				if (_left) FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left - 5, _rc.top, 0, 1);
+				else FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0); break;
+			}
+			if (_plAtkNum == 2)
+			{
+				if (_left) FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left - 5, _rc.top, 0, 1);
+				else FINDIMG("boss_hit")->frameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0); break;
+			}
 		case E_FLYING:
 			if (_left) FINDIMG("boss_dead")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 1);
 			else FINDIMG("boss_dead")->frameRender(getMemDC(), _rc.left, _rc.top, _index, 0); break;
@@ -424,5 +474,10 @@ void boss::render()
 		if (_left) FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left - 21, _rc.top-5, _index, 1);
 		else FINDIMG("boss_crawl")->frameRender(getMemDC(), _rc.left - 40, _rc.top - 5, _index, 0);
 	}
-	if (KEYMANAGER->isToggleKey(VK_F1)) Rectangle(getMemDC(), _rc);
+	if (KEYMANAGER->isToggleKey(VK_F1))
+	{
+		Rectangle(getMemDC(), _rc);
+		Rectangle(getMemDC(), _attackRc);
+	}
+	
 }
