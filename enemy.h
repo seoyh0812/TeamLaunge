@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 
-enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING, E_WALK2, E_SHAKE };
+enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING, E_WALK2, E_SHAKE, E_FLYING2 };
 
 class enemy : public gameNode
 {
@@ -25,7 +25,8 @@ protected:
 	bool _isDead;					//몬스터가 죽었는지 살았는지 여부 체크
 	int _deadCount;					//죽는 모션이 1개인 경우 죽고 난 다음 일정시간을 유지하기위해 만듬
 	int _flyingCount;				//체공시간을 체크하려고 만듬
-	bool _deadFly;					//임의로 지은이름, 죽기전에 나는 동작이있는데 일정 시간동안 날고있는지 여부를 체크하기위해 만듬
+	bool _flyDown;					
+	int _alpha;
 
 	RECT _shadow;
 
@@ -53,4 +54,5 @@ public:
 	void getDamage(int x) { _currentHP -= x; }
 	void setState(enemyState state);
 	float getY() { return _y; }
+	void setAtkNum() { _plAtkNum = RND->getFromIntTo(1, 3); }
 };

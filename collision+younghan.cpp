@@ -20,6 +20,24 @@ void collision::younghanUpdate()
 			RECT temp;
 			if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRect(), &_pl->getAttack()->getVAttack()[j].rc))
 			{
+				int effectSound = RND->getInt(4);
+				switch (effectSound)
+				{
+				case 0:
+					SOUNDMANAGER->play("타격1");
+					break;
+				case 1:
+					SOUNDMANAGER->play("타격2");
+					break;
+				case 2:
+					SOUNDMANAGER->play("타격3");
+					break;
+				case 3:
+					SOUNDMANAGER->play("타격4");
+					break;
+				default:
+					break;
+				}
 				_em->getVEnemy()[i]->getState() = E_HIT;
 				_em->getVEnemy()[i]->getDamage(20);
 				_score += 100;
