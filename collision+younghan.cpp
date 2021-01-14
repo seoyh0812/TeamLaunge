@@ -25,13 +25,13 @@ void collision::younghanUpdate()
 					RECT temp;
 					if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRect(), &_pl->getAttack()->getVAttack()[j].rc))
 					{
-						
+						_pl->getAttack()->removeAttack(j);
 						if (_em->getVEnemy()[i]->getState() == E_GRAB && _pl->getFlyCount() >= 20)
 						{
 							_em->getVEnemy()[i]->getState() = E_FLYING;
 						}
 						_score += 100;
-						hitted = true;
+						
 						break;
 					}
 				}
