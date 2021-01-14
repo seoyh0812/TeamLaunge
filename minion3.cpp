@@ -305,8 +305,8 @@ void minion3::enemyStateRender()
 		if (_left) FINDIMG("enemy3_dead")->alphaFrameRender(getMemDC(), _rc.left - 40, _rc.top - 55, _index, 0, _alpha);
 		else FINDIMG("enemy3_dead")->alphaFrameRender(getMemDC(), _rc.left - 50, _rc.top - 55, _index, 1, _alpha);		break;
 	case E_HIT:
-		if (_left) FINDIMG("enemy3_hit")->frameRender(getMemDC(), _rc.left - 45, _rc.top - 50, _index, 0);
-		else FINDIMG("enemy3_hit")->frameRender(getMemDC(), _rc.left - 30, _rc.top - 50, _index, 1);		break;
+		if (_left) FINDIMG("enemy3_hit")->alphaFrameRender(getMemDC(), _rc.left - 45, _rc.top - 50, _index, 0, _alpha);
+		else FINDIMG("enemy3_hit")->alphaFrameRender(getMemDC(), _rc.left - 30, _rc.top - 50, _index, 1, _alpha);		break;
 	case E_GRAB:
 		if (_left) FINDIMG("enemy3_grab")->frameRender(getMemDC(), _rc.left - 40, _rc.top - 70, _index, 0);
 		else FINDIMG("enemy3_grab")->frameRender(getMemDC(), _rc.left - 35, _rc.top - 70, _index, 1); break;
