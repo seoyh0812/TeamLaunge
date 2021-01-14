@@ -125,11 +125,14 @@ void mainScene::cameraControl()
 	}
 	if (_ending)
 	{
+		_time += TIMEMANAGER->getElapsedTime();
+	}
+	if (_time > 3.4f)
+	{
 		CAMERAMANAGER->cameraLockOff();
 		CAMERAMANAGER->setCameraX(0);
 		CAMERAMANAGER->setCameraY(0);
 		SCENEMANAGER->changeScene("¿£µù¾À");
 	}
-
 }
 
