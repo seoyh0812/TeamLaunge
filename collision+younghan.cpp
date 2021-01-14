@@ -43,8 +43,11 @@ void collision::younghanUpdate()
 						default:
 							break;
 						}
-						_em->getVEnemy()[i]->getState() = E_FLYING;
-						_em->getVEnemy()[i]->getDamage(20);
+						if (_em->getVEnemy()[i]->getState() == E_GRAB)
+						{
+							_em->getVEnemy()[i]->getState() = E_FLYING;
+							_em->getVEnemy()[i]->getDamage(20);
+						}
 						_score += 100;
 						hitted = true;
 						break;
@@ -98,8 +101,10 @@ void collision::younghanUpdate()
 					if (IntersectRect(&temp, &_pl->getFlyRc(), &_em->getVEnemy()[i]->getRect()))
 					{
 						if (temp.right - temp.left > (_em->getVEnemy()[i]->getRect().right - _em->getVEnemy()[i]->getRect().left) / 3 && _pl->getFlyY() - _em->getVEnemy()[i]->getY() < 4
-							&& _pl->getFlyY() - _em->getVEnemy()[i]->getY() > -4)
+							&& _pl->getFlyY() - _em->getVEnemy()[i]->getY() > -4 && (KEYMANAGER->isStayKeyDown(VK_LEFT) || KEYMANAGER->isStayKeyDown(VK_RIGHT)))
 						{
+							if (_pl->getLeft()) _em->getVEnemy()[i]->getLeft() = false;								
+							else _em->getVEnemy()[i]->getLeft() = true;
 							_em->getVEnemy()[i]->setState(E_GRAB);
 							_pl->getIsGrab() = true;
 							break;
