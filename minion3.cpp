@@ -164,6 +164,10 @@ void minion3::enemyState()
 		break;
 
 	case E_HIT:
+		//피격시 알파를 순식간에 더했다빼서 반짝거리는 효과를 추가
+		_alpha -= 255;
+		if (_alpha < 0) _alpha = 255;
+
 		//E_HIT 이미지는 한개의 이미지이기때문에 _index를 0으로 고정시켜 이미지가 고정되도록 해준다
 		_index = 0;
 
@@ -174,6 +178,7 @@ void minion3::enemyState()
 		//enemy의 현재 체력이 0과 같거나 작아지면 E_DEAD상태로 변경
 		if (_currentHP <= 0)
 		{
+			_alpha = 255;
 			setState(E_DEAD);
 		}
 

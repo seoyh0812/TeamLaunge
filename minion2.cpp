@@ -173,6 +173,10 @@ void minion2::enemyState()
 		break;
 
 	case E_HIT:
+		//피격시 알파를 순식간에 더했다빼서 반짝거리는 효과를 추가
+		_alpha -= 255;
+		if (_alpha < 0) _alpha = 255;
+
 		//E_HIT 이미지는 한개의 이미지이기때문에 _index를 0으로 고정시켜 이미지가 고정되도록 해준다
 		_index = 0;
 
@@ -183,6 +187,7 @@ void minion2::enemyState()
 		//enemy의 현재 체력이 0과 같거나 작아지면 E_DEAD상태로 변경
 		if (_currentHP <= 0)
 		{
+			_alpha = 255;
 			setState(E_DEAD);
 		}
 
@@ -309,8 +314,8 @@ void minion2::enemyStateRender()
 		if (_left) FINDIMG("enemy2_dead")->alphaFrameRender(getMemDC(), _rc.left - 110, _rc.top - 175, _index, 1, _alpha);
 		else FINDIMG("enemy2_dead")->alphaFrameRender(getMemDC(), _rc.left - 60, _rc.top - 175, _index, 0, _alpha);		break;
 	case E_HIT:
-		if (_left) FINDIMG("enemy2_hit")->frameRender(getMemDC(), _rc.left - 50, _rc.top - 77, _index, 0);
-		else FINDIMG("enemy2_hit")->frameRender(getMemDC(), _rc.left - 175, _rc.top - 87, _index, 1);		break;
+		if (_left) FINDIMG("enemy2_hit")->alphaFrameRender(getMemDC(), _rc.left - 50, _rc.top - 77, _index, 0, _alpha);
+		else FINDIMG("enemy2_hit")->alphaFrameRender(getMemDC(), _rc.left - 175, _rc.top - 87, _index, 1, _alpha);		break;
 	case E_GRAB:
 		if (_left) FINDIMG("enemy2_grab")->frameRender(getMemDC(), _rc.left - 180, _rc.top - 100, _index, 0);
 		else FINDIMG("enemy2_grab")->frameRender(getMemDC(), _rc.left - 50, _rc.top - 100, _index, 1);		break;
@@ -318,8 +323,8 @@ void minion2::enemyStateRender()
 		if (_left) FINDIMG("enemy2_flying")->frameRender(getMemDC(), _rc.left - 30, _rc.top - 77, _index, 0);
 		else FINDIMG("enemy2_flying")->frameRender(getMemDC(), _rc.left - 220, _rc.top - 77, _index, 1);	break;
 	case E_FLYING2:
-		if (_left) FINDIMG("enemy2_flying")->frameRender(getMemDC(), _rc.left - 30, _rc.top - 10, _index, 0);
-		else FINDIMG("enemy2_flying")->frameRender(getMemDC(), _rc.left - 60, _rc.top - 10, _index, 1); break;
+		if (_left) FINDIMG("enemy2_flying")->alphaFrameRender(getMemDC(), _rc.left - 30, _rc.top - 10, _index, 0, _alpha);
+		else FINDIMG("enemy2_flying")->alphaFrameRender(getMemDC(), _rc.left - 60, _rc.top - 10, _index, 1, _alpha); break;
 	}
 }
 

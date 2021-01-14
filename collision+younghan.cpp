@@ -86,6 +86,7 @@ void collision::younghanUpdate()
 						default:
 							break;
 						}
+						_em->getVEnemy()[i]->setAlpha(); //enemy의 알파를 255로 설정
 						_em->getVEnemy()[i]->setAtkNum(); //enemy1이라면 피격모션을 랜덤으로 출력시키고
 						_em->getVEnemy()[i]->getState() = E_HIT; //enemy를 E_HIT상태로 변경
 						_em->getVEnemy()[i]->getDamage(20); //enemy에게 20의 데미지를 가한다

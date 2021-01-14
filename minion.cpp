@@ -187,6 +187,10 @@ void minion::enemyState()
 		break;
 
 	case E_HIT:
+		//피격시 알파를 순식간에 더했다빼서 반짝거리는 효과를 추가
+		_alpha -= 255;
+		if (_alpha < 0) _alpha = 255;
+
 		//E_HIT 이미지는 한개의 이미지이기때문에 _index를 0으로 고정시켜 이미지가 고정되도록 해준다
 		_index = 0;
 
@@ -197,6 +201,7 @@ void minion::enemyState()
 		//enemy의 현재 체력이 0과 같거나 작아지면 E_DEAD상태로 변경
 		if (_currentHP <= 0)
 		{
+			_alpha = 255;
 			setState(E_DEAD);
 		}
 		
@@ -226,6 +231,10 @@ void minion::enemyState()
 		break;
 
 	case E_FLYING:
+		//바닥에 떨어질시 알파를 순식간에 더했다빼서 반짝거리는 효과를 추가
+		if (_index != 0) _alpha -= 255;
+		if (_alpha < 0) _alpha = 255;
+
 		//날고있는상태에서 인덱스를 고정시켜줌
 		if (_flying) _index = 0;
 
@@ -298,6 +307,7 @@ void minion::enemyState()
 		}
 		if (_flyDown && _rc.bottom >= _shadow.top - 10)
 		{
+			_alpha = 255;
 			setState(E_FLYING);
 			_index = 1;
 			_flyDown = false;
@@ -335,22 +345,22 @@ void minion::enemyStateRender()
 		//enemy 피격모션 1
 		if (_plAtkNum == 1)
 		{
-			if (_left) FINDIMG("enemy1_hit1")->frameRender(getMemDC(), _rc.left - 65, _rc.top - 43, _index, 0);
-			else FINDIMG("enemy1_hit1")->frameRender(getMemDC(), _rc.left - 65, _rc.top - 43, _index, 1);
+			if (_left) FINDIMG("enemy1_hit1")->alphaFrameRender(getMemDC(), _rc.left - 65, _rc.top - 43, _index, 0, _alpha);
+			else FINDIMG("enemy1_hit1")->alphaFrameRender(getMemDC(), _rc.left - 65, _rc.top - 43, _index, 1, _alpha);
 		}
 		//enemy 피격모션 2
 		if (_plAtkNum == 2)
 		{
-			if (_left) FINDIMG("enemy1_hit3")->frameRender(getMemDC(), _rc.left - 65, _rc.top - 13, _index, 0);
-			else FINDIMG("enemy1_hit3")->frameRender(getMemDC(), _rc.left - 65, _rc.top - 13, _index, 1);
+			if (_left) FINDIMG("enemy1_hit3")->alphaFrameRender(getMemDC(), _rc.left - 65, _rc.top - 13, _index, 0, _alpha);
+			else FINDIMG("enemy1_hit3")->alphaFrameRender(getMemDC(), _rc.left - 65, _rc.top - 13, _index, 1, _alpha);
 		}
 		break;
 	case E_GRAB:
 		if (_left) FINDIMG("enemy1_grab")->frameRender(getMemDC(), _rc.left - 30, _rc.top - 30, _index, 0);
 		else FINDIMG("enemy1_grab")->frameRender(getMemDC(), _rc.left, _rc.top - 30, _index, 1); break;
 	case E_FLYING:
-		if (_left) FINDIMG("enemy1_flying")->frameRender(getMemDC(), _rc.left - 30, _rc.top - 10, _index, 0);
-		else FINDIMG("enemy1_flying")->frameRender(getMemDC(), _rc.left - 60, _rc.top - 10, _index, 1); break;
+		if (_left) FINDIMG("enemy1_flying")->alphaFrameRender(getMemDC(), _rc.left - 30, _rc.top - 10, _index, 0, _alpha);
+		else FINDIMG("enemy1_flying")->alphaFrameRender(getMemDC(), _rc.left - 60, _rc.top - 10, _index, 1, _alpha); break;
 	case E_FLYING2:
 		if (_left) FINDIMG("enemy1_flying")->frameRender(getMemDC(), _rc.left - 30, _rc.top - 10, _index, 0);
 		else FINDIMG("enemy1_flying")->frameRender(getMemDC(), _rc.left - 60, _rc.top - 10, _index, 1); break;

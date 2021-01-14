@@ -44,6 +44,7 @@ public:
 	void getDamage(int x) { _currentHP -= x; }
 	void setState(enemyState state);
 	void setAtkNum() { _plAtkNum = RND->getFromIntTo(1, 3); }
+	void setAlpha() { _alpha = 255; }
 
 	RECT& getRect() { return _rc; }
 	RECT& getShadow() { return _shadow; }
