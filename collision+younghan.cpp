@@ -17,6 +17,7 @@ void collision::younghanUpdate()
 		for (int i = 0; i < _em->getVEnemy().size(); ++i)
 		{
 			RECT sour;
+			if (_em->getVEnemy()[i]->getPhase() == 1 || _em->getVEnemy()[i]->getPhase() == 2) continue;
 			if (_em->getVEnemy()[i]->getState() == E_HIT || _em->getVEnemy()[i]->getState() == E_DEAD) continue;
 			if (IntersectRect(&sour, &_em->getVEnemy()[i]->getShadow(), &_pl->getShadow()))
 			{
@@ -43,6 +44,7 @@ void collision::younghanUpdate()
 		for (int i = 0; i < _em->getVEnemy().size(); ++i)
 		{
 			RECT sour;
+			if (_em->getVEnemy()[i]->getPhase() == 1 || _em->getVEnemy()[i]->getPhase() == 2) continue;
 			if (_em->getVEnemy()[i]->getState() == E_HIT || _em->getVEnemy()[i]->getState() == E_DEAD) continue;
 			if (IntersectRect(&sour, &_em->getVEnemy()[i]->getShadow(), &_pl->getShadow()))
 			{
