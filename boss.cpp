@@ -166,13 +166,16 @@ void boss::bossState()
 		break;
 
 	case E_ATK:
-		if (_left)
+		if (_index == 2)
 		{
-			_attackRc = RectMakeCenter(_x - 110, _y - 45, 120, 80);
-		}
-		else
-		{
-			_attackRc = RectMakeCenter(_x + 110, _y - 45, 120, 80);
+			if (_left)
+			{
+				_attackRc = RectMakeCenter(_x - 110, _y - 45, 120, 80);
+			}
+			else
+			{
+				_attackRc = RectMakeCenter(_x + 110, _y - 45, 120, 80);
+			}
 		}
 		if (_index > 2)
 		{
