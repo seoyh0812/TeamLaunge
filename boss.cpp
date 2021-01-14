@@ -357,6 +357,8 @@ HRESULT boss::init(float x, float y)
 	_destX = CAMX + WINSIZEY / 2;
 	_destY = CAMY + WINSIZEY / 2;
 
+	SOUNDMANAGER->stop("메인브금");
+	SOUNDMANAGER->play("보스등장");
 	return S_OK;
 }
 
@@ -409,6 +411,13 @@ void boss::update()
 			_shadow = RectMake(_shadow.left, _shadow.top, 180, 50);
 		}
 		else  _shadow = RectMakeCenter(_destX, _destY+60, 180, 50);
+	}
+	if(!SOUNDMANAGER->isPlaySound("보스등장") && 
+		!SOUNDMANAGER->isPlaySound("보스브금") &&
+		!SOUNDMANAGER->isPlaySound("메인브금"))
+	{//사운드 설정.
+		SOUNDMANAGER->play("보스목소리");
+		SOUNDMANAGER->play("보스브금");
 	}
 }
 

@@ -48,13 +48,6 @@ void mainScene::cameraControl()
 		_pl->getJumpPower() = 20;
 		_pl->getFlyX() = _tempX;
 		_pl->getFlyY() = _pl->getGroundY() - 21;
-		if (CAMY < 55)
-		{
-			CAMERAMANAGER->setCameraY(55);
-			_mapChanging = false;
-			SOUNDMANAGER->stop("메인브금");
-			SOUNDMANAGER->play("보스등장");
-		}
 	}
 	if (CAMY < 700) // 루프렌더용
 	{
@@ -68,7 +61,6 @@ void mainScene::cameraControl()
 			--_loopY;
 		}
 	}
-	if (CAMY==55 &&!SOUNDMANAGER->isPlaySound("보스등장") && !SOUNDMANAGER->isPlaySound("보스브금")) SOUNDMANAGER->play("보스브금");
 	if (_redCount < 29) ++_redCount;
 	else _redCount = 0;
 
