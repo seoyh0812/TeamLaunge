@@ -134,5 +134,20 @@ void mainScene::cameraControl()
 		CAMERAMANAGER->setCameraY(0);
 		SCENEMANAGER->changeScene("¿£µù¾À");
 	}
+	if (_playerHpRatio <= 0 && _pl->getEnumState() != DEAD)
+	{
+		_pl->setState(DEAD);
+		--_life;
+	}
+	if (_pl->getEnumState() == DEAD && KEYMANAGER->isStayKeyDown(VK_RETURN))
+	{
+		_pl->setState(JUMP);
+		_pl->getPlHP() = 100;
+		_pl->getGroundX() = CAMX + 100;
+		_pl->getGroundY() = CAMY + 500;
+		_pl->getFlyX() = CAMX + 100;
+		_pl->getFlyY() = CAMY - 200;
+	}
+
 }
 
