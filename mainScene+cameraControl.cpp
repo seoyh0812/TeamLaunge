@@ -95,6 +95,10 @@ void mainScene::cameraControl()
 		// 의자 출력 추가 부분. 
 		for (int i = 0; i < 3; i++)
 		{
+			_sm->createChair(3100 + (i * 360), 465);
+		}
+		for (int i = 0; i < 3; i++)
+		{
 			_sm->createChair(3135 + (i * 360), 490);
 			for (int j = 0; j < 3; j++)
 			{

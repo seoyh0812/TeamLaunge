@@ -14,7 +14,7 @@ HRESULT minion::init(float x, float y)
 	_x = CAMX + x;	_y = CAMY + y;
 	_currentHP = _maxHP = 100;
 	_count = _index = _attackCount = _hitCount = _grabCount = 0;
-	_randomNum = RND->getFromIntTo(-3, 3);
+	_randomNum = RND->getFromIntTo(-15, 15);
 
 	_plAtkNum = 1;
 	_alpha = 255;
