@@ -9,6 +9,7 @@ void mainScene::cameraControl()
 	CAMERAMANAGER->focusOnRect(temp, 3);
 	if (CAMY <= 55 && CAMX < 1849) CAMERAMANAGER->setCameraX(1849);
 	if (CAMY > 55 && CAMX > 2816) CAMERAMANAGER->setCameraX(2816);
+	// 맵밖 카메라 가는거 막는 역할
 	if (CAMY != 55 && CAMX == 2816 && !_mapChanging)
 	{
 		_pl->getJumpPower() = 0;
@@ -18,6 +19,7 @@ void mainScene::cameraControl()
 
 	_playerHeight = _pl->getGroundRc().bottom - _pl->getGroundRc().top;
 	_playerWidth = _pl->getGroundRc().right - _pl->getGroundRc().left;
+	// 플레이어가 화면 일정범위내만 이동하도록 막음
 	if (_pl->getGroundRc().bottom < CAMY + 442)
 	{
 		_pl->getGroundY() = CAMY + 442 - _playerHeight / 2;
@@ -40,7 +42,7 @@ void mainScene::cameraControl()
 	}
 
 	if (_mapChanging && CAMY > 55)
-	{
+	{ // 맵바뀌는중(2층으로)
 		CAMERAMANAGER->setCameraY(CAMY - 20);
 		_pl->setState(JUMP);
 		_pl->getGroundX() = _tempX;
@@ -62,7 +64,7 @@ void mainScene::cameraControl()
 		}
 	}
 	if (_redCount < 29) ++_redCount;
-	else _redCount = 0;
+	else _redCount = 0; // 빨피 카운트
 
 	// 몹젠
 	if (_phase == NO_PHASE && CAMX > 500)
@@ -112,7 +114,7 @@ void mainScene::cameraControl()
 	}
 	
 	for (int i = 0; i < _im->getVItem().size(); i++)
-	{// 아이템 잡고 던지기. 먹기
+	{// 배트먹으면 엔딩
 		if (IntersectRect(&temp, &_pl->getShadow(), &_im->getVItem()[i]->getShadow()))
 		{
 			if (KEYMANAGER->isStayKeyDown('C'))
@@ -126,7 +128,7 @@ void mainScene::cameraControl()
 		}
 	}
 	if (_ending)
-	{
+	{ // 일정시간이후 엔딩으로
 		_time += TIMEMANAGER->getElapsedTime();
 	}
 	if (_time > 3.4f)
@@ -136,14 +138,16 @@ void mainScene::cameraControl()
 		CAMERAMANAGER->setCameraY(0);
 		SCENEMANAGER->changeScene("엔딩씬");
 	}
-	if (_playerHpRatio <= 0 && _pl->getEnumState() != DEAD)
-	{
+	if ((_playerHpRatio <= 0 || _timeLimit <= 0) && _pl->getEnumState() != DEAD)
+	{ // 플레이어 죽음처리
 		_pl->setState(DEAD);
+		_pl->getPlHP() = 0;
 		--_life;
 		if (_life < 0) _life = 0;
 	}
 	if (_pl->getEnumState() == DEAD && KEYMANAGER->isStayKeyDown(VK_RETURN))
-	{
+	{ // 플레이어 리젠
+		_timeLimit = 99;
 		_pl->setState(JUMP);
 		_pl->getPlHP() = 100;
 		_pl->getGroundX() = CAMX + 100;

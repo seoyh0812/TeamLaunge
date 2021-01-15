@@ -5,12 +5,12 @@ void mainScene::zOrderRender()
 { // ###################### z오더 구현 여기부터 ##################
 	RECT temp;
 	for (int i = 0; i < _em->getVEnemy().size(); ++i)
-	{ // 벡터에 객체들의 렉트.바텀값을 추가(푸시백)해줌
+	{ // 벡터에 객체의 그림자 렉트.바텀값을 추가(푸시백)해줌
 		temp = _em->getVEnemy()[i]->getShadow(); // 이건 적들
 		if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);
 	}
 	for (int i = 0; i < _sm->getVObject().size(); ++i)
-	{ // 벡터에 객체들의 렉트.바텀값을 추가(푸시백)해줌
+	{ // 벡터에 객체의 그림자 렉트.바텀값을 추가(푸시백)해줌
 		temp = _sm->getVObject()[i]->getShadow(); // 이건 오브젝트들
 		if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);
 	}
@@ -24,19 +24,17 @@ void mainScene::zOrderRender()
 	}
 	temp = _pl->getShadow(); // 이건 플레이어
 	bottomY.push_back(temp.bottom);
-	// y값을 하나하나 넣었음	
+	// y값을 모두 넣었음
 
-	if (bottomY.size() > 1 ) QuickSort(0, bottomY.size() - 1); // 이게 퀵정렬
+	if (bottomY.size() > 1 ) QuickSort(0, bottomY.size() - 1); // 퀵정렬
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-
 		for (int i = 0; i < bottomY.size(); ++i)
 		{
 			sprintf_s(_str, "%d", bottomY[i]);
 			TextOut(getMemDC(), CAMX + 80 * i, CAMY + 100, _str, strlen(_str));
 		}
-
 	}
 	for (int i = 0; i < bottomY.size(); ++i)
 	{ // 정렬했으니 벡터에 담긴 순서대로 그리기로 함
@@ -84,6 +82,7 @@ void mainScene::uiRender()
 {
 	FINDIMG("플레이어ui")->render(getMemDC(), CAMX + 170, CAMY);
 	FINDIMG("그냥텍스트")->frameRender(getMemDC(), CAMX + 670, CAMY, _timeLimit % 2, 0);
+	if (_timeLimit < 0) _timeLimit = 0;
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 466, CAMY + 30, _timeLimit / 10, 0);
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 513, CAMY + 30, _timeLimit % 10, 0);
 	FINDIMG("노란숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 53, _life, 0);
