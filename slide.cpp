@@ -19,10 +19,18 @@ void slide::updateState()
     if (!_pl->getLeft())
     {
         _pl->getFlyX() += _pl->getJumpPower();
+		if (_pl->getFlyX() >= _pl->getGroundX())
+		{
+			_pl->getGroundX() = _pl->getFlyX();
+		}
     }
     if (_pl->getLeft())
     {
         _pl->getFlyX() -= _pl->getJumpPower();
+		if (_pl->getFlyX() <= _pl->getGroundX())
+		{
+			_pl->getGroundX() = _pl->getFlyX();
+		}
     }
 
     if (_pl->getJumpPower() <= 0)

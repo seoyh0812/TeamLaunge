@@ -14,7 +14,7 @@ void walk::updateState()
 		if (!_pl->getLeft())
 		{
 			_pl->plusDirectionChanged();
-			_pl->getLeft() = true; // 방향바뀜 카운트 올려주고 왼쪽으로
+			_pl->getLeft() = true;
 		}
 		_pl->getFlyX() -= 3;	_pl->getGroundX() -= 3;
 	}
@@ -23,7 +23,7 @@ void walk::updateState()
 		if (_pl->getLeft())
 		{
 			_pl->plusDirectionChanged();
-			_pl->getLeft() = false; // 방향바뀜 카운트 올려주고 오른쪽으로
+			_pl->getLeft() = false;
 		}
 		_pl->getFlyX() += 3;	_pl->getGroundX() += 3;
 	}

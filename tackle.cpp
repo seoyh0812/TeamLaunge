@@ -13,13 +13,21 @@ void tackle::updateState()
 {
     _pl->getJumpPower() -= GRAVITY;
     _pl->getGroundX() = _pl->getFlyX();
-    if (!_pl->getLeft())
+    if (!_pl->getLeft()) // 앞으로 쭉 밀려나가다 점점 속도가 감소하는거처럼 보이게 만들었습니다
     {
         _pl->getFlyX() += _pl->getJumpPower();
+		if (_pl->getFlyX() >= _pl->getGroundX())
+		{
+			_pl->getGroundX() = _pl->getFlyX();
+		}
     }
     if (_pl->getLeft())
     {
         _pl->getFlyX() -= _pl->getJumpPower();
+		if (_pl->getFlyX() <= _pl->getGroundX())
+		{
+			_pl->getGroundX() = _pl->getFlyX();
+		}
     }
 
     if (_pl->getJumpPower() <= 0)

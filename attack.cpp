@@ -4,7 +4,7 @@
 HRESULT attack::init(int attackMax)
 {
 	_attackMax = attackMax;
-	_count = 20;
+	_count = 10; // 초기에 카운트 부여
 	return S_OK;
 }
 
@@ -18,11 +18,11 @@ void attack::update(int count)
 
 	for (_viAttack = _vAttack.begin(); _viAttack != _vAttack.end();)
 	{
-		_count--;
+		_count--; // 카운트가 감소하면 공격 렉트를 삭제하고 이후 초기화되게 했습니다
 		if (_count <= 0)
 		{
 			_viAttack = _vAttack.erase(_viAttack);
-            _count = 20;
+            _count = 10;
 		}
 		else ++_viAttack;
 	}

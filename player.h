@@ -6,7 +6,7 @@ class attack;
 
 class enemyManager;
 
-class STATE; // 상호참조시 전방선언 같은거
+class STATE; // 상호참조시 전방선언
 
 enum State {
 	IDLE,
@@ -40,7 +40,7 @@ private:
 	RECT _flyRc;
 	float _groundX; float _groundY; // 땅에 붙는RC
 	RECT _groundRc;
-	RECT _shadow;					//9림자 rc
+	RECT _shadow;					//그림자 rc
 	bool _left;						// 왼쪽을 보고 있는지
 	State _enumState;
 	STATE* _statePattern;
@@ -50,9 +50,8 @@ private:
 	attack* _attack;
 	int _count, _index; //프레임 이미지 재생용 카운트, 인덱스.
     float _jumpPower; // 점프 파워
-    bool _isHit;        //맞았는지, 잡았는지 불바다
     bool _isGrab;
-	int _flyCount; // 적당한 때에 날아가기 위한? 카운트
+	int _flyCount; // 적당한 때에 날아가기 위한 카운트
 
 	// ############ 커맨드 입력 관련 변수(대시, 특수기) #############
 	int _directionChanged;		// 좌우가 몇번 바뀌었는지 카운트(커맨드)
@@ -74,12 +73,8 @@ public:
 	void minusDirectionChanged();
 
 	void playerRender();
-	// 플레이어 변수에따라 여러 렌더를 하겠지만
-	// 여기엔 z오더 서순에 맞춰야할 플레이어 캐릭터'만' 그려주는 것
-	// 그래서 렌더에서 분리한 것임
 
-	// 상태패턴 하면 게터 미친듯이 많아지는듯함. 창훈이것도 봤었는데 엄청 많더라
-	// 여기서 직접 연산하는것보다 상태객체에서 연산이 되기 때문에..
+	//세터와 게터들입니다
 	void setState(State state);
 	void stateUpdate();
 	void stateRender();
@@ -97,7 +92,6 @@ public:
 	attack* getAttack() { return _attack; }
 	int& getIndex() { return _index; }
     float& getJumpPower() { return _jumpPower; }
-    bool& getIsHit() { return _isHit; }
     bool& getIsGrab() { return _isGrab; }
     float& getPlHP() { return _currentHP; }
     void getDamage(int x) { _currentHP -= x; }

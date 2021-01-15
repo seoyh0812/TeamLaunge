@@ -7,7 +7,6 @@
 void Jump::EnterState()
 {
 	_pl->getFlyRc() = _pl->getGroundRc();
-	// 여기서 방향에따라 이미지넣고 인덱스 대충 초기화해줌
 }
 
 void Jump::updateState()
@@ -17,7 +16,7 @@ void Jump::updateState()
 		if (!_pl->getLeft())
 		{
 			_pl->plusDirectionChanged();
-			_pl->getLeft() = true; // 방향바뀜 카운트 올려주고 왼쪽으로
+			_pl->getLeft() = true;
 		}
 		_pl->getFlyX() -= 3;	_pl->getGroundX() -= 3;
 	}
@@ -26,7 +25,7 @@ void Jump::updateState()
 		if (_pl->getLeft())
 		{
 			_pl->plusDirectionChanged();
-			_pl->getLeft() = false; // 방향바뀜 카운트 올려주고 오른쪽으로
+			_pl->getLeft() = false;
 		}
 		_pl->getFlyX() += 3;	_pl->getGroundX() += 3;
 	}
@@ -40,9 +39,9 @@ void Jump::updateState()
 	}
 
     _pl->getJumpPower() -= GRAVITY;
-    _pl->getFlyY() -= _pl->getJumpPower(); // 늘상 보던 중력과 점프파워
-	if (_pl->getFlyY() > _pl->getGroundY())
-	{ // 
+    _pl->getFlyY() -= _pl->getJumpPower(); // 중력만큼 점프파워를 점점 떨어트려 자연스럽게 점프하는거처럼 보이게 만들었습니다
+	if (_pl->getFlyY() > _pl->getGroundY()) // 점프중인 렉트가 땅에 있는 렉트보다 내려간다면 상태를 바꾸고 각각의 위치를 같게 해줬습니다
+	{ 
 		_pl->getFlyY() = _pl->getGroundY();
 		_pl->setState(IDLE);
 	}

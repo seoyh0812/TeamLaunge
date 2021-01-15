@@ -16,7 +16,6 @@ void hit::updateState()
     if (count <= 0)
     {
         _pl->setState(IDLE);
-        _pl->getIsHit() = false;
     }
 }
 
