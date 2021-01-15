@@ -97,10 +97,6 @@ void bat::update()
 		_xg = _x;//땅렉트
 		_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//땅렉트
 	}
-	if (_time > 3)
-	{
-		//게임종료 함수
-	}
 }
 
 void bat::render()
@@ -142,9 +138,10 @@ void bat::setHold(float x, float y, float bottom)
 void bat::attackMove(bool direction)
 {//매니저에서 사용할 함수.
 	if (_pickup)
-	{
+	{//한번만 적용되도록.
 		_gravity = -5;
 		_yg -= (RND->getFromIntTo(3, 9))*10;
+		_movement += (5 - (RND->getInt(10)));
 	}
 	_pickup = false;
 	if (_yg > _y)

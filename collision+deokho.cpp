@@ -61,7 +61,7 @@ void collision::deokhoUpdate()
 						else _im->getVItem()[i]->makeInflect(-1.5f);
 					}
 					if (_im->getVItem()[i]->getID() == 2)
-					{
+					{//ÆøÅºÀÌ´Ï?
 						_em->getVEnemy()[j]->setState(E_DEAD);
 						_im->getVItem()[i]->makeBoom();
 					}

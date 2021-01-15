@@ -125,7 +125,7 @@ void itemManager::createPizza(float x, float y, float bottom)
 }
 
 void itemManager::createFood(float x, float y)
-{
+{//랜덤한 방향으로 움직이며 나오도록 함.
 	
 	switch (RND->getInt(5))
 	{
@@ -170,7 +170,7 @@ void itemManager::createFood(float x, float y)
 }
 
 void itemManager::createFood(float x, float y, float bottom)
-{
+{//특정한 위치에 떨어지도록 함.
 	switch (RND->getInt(5))
 	{
 	case 0:
@@ -182,13 +182,13 @@ void itemManager::createFood(float x, float y, float bottom)
 	case 1:
 		hamberger* vHamberger;
 		vHamberger = new hamberger;
-		vHamberger->init(x + 50, y, bottom);
+		vHamberger->init(x, y, bottom);
 		_vItem.push_back(vHamberger);
 		break;
 	case 2:
 		cereal* vCereal;
 		vCereal = new cereal;
-		vCereal->init(x + 100, y, bottom);
+		vCereal->init(x, y, bottom);
 		_vItem.push_back(vCereal);
 		break;
 	case 3:
@@ -206,12 +206,6 @@ void itemManager::createFood(float x, float y, float bottom)
 	default:
 		break;
 	}
-	
-
-	
-
-	
-
 	
 }
 
