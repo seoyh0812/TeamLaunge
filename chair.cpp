@@ -17,7 +17,6 @@ HRESULT chair::init(float x, float y)
 	_img = IMAGEMANAGER->findImage("의자");
 	_isFire = true;
 	_isBossOn = false;
-
 	_shadow = RectMakeCenter(_x - 20, _rc.bottom - 60, 210, 50);
 
 	return S_OK;
@@ -40,10 +39,7 @@ void chair::render()
 	// TextOut(getMemDC(), _rc.left, _rc.top, "난 의자", strlen("난 의자"));
 	if (KEYMANAGER->isToggleKey('O'))
 	{
-		//Rectangle(getMemDC(), _chairRect);
 		Rectangle(getMemDC(), _rc);
-
-
 	}
 }
 

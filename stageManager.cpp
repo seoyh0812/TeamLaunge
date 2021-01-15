@@ -32,14 +32,14 @@ HRESULT stageManager::init()
 	}
 
 	//// 보스 등장 후 의자 위치지정.  (등장조건 필요함 - 보스가 등장하게되면 나타나게 된다.) 보스 등장하고 만들기. 
-	for (int i = 0; i < 3; i++)
+	/*for (int i = 0; i < 3; i++)
 	{
 		createChair(3135 + (i * 360), 490);
 		for (int j = 0; j < 3; j++)
 		{
 			createChair(3300 + (j * 355), 760);
 		}
-	}
+	}*/
 
 
 	return S_OK;

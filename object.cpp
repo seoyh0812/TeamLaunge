@@ -26,3 +26,7 @@ void object::update()
 void object::render()
 {
 }
+
+void object::GrapChair(float x, float y)
+{
+}
