@@ -214,6 +214,7 @@ void minion3::enemyState()
 		//enemy가 카메라 화면 오른쪽 밖으로 나가려고한다면 E_FLYING2로 변경
 		if (_rc.right > CAMX + WINSIZEX && _flying && _left)
 		{
+			_alpha = 255;
 			setState(E_FLYING2);
 			_x -= 5;			//x좌표 위치를 보정
 		}
@@ -221,6 +222,7 @@ void minion3::enemyState()
 		//enemy가 카메라 화면 왼쪽 밖으로 나가려고한다면 E_FLYING2로 변경
 		if (_rc.left < CAMX && _flying && !_left && _index == 0)
 		{
+			_alpha = 255;
 			setState(E_FLYING2);
 			_x += 5;			//x좌표 위치를 보정
 		}

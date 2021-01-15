@@ -38,6 +38,7 @@ void collision::younghanUpdate()
 						if (_em->getVEnemy()[i]->getState() == E_GRAB && _pl->getFlyCount() >= 20)
 						{
 							//적의 상태를 E_FLYING으로 변경
+							_em->getVEnemy()[i]->setAlpha();
 							_em->getVEnemy()[i]->getState() = E_FLYING;
 						}
 						_score += 100; //점수를 100만큼 더해준다
