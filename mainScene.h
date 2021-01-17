@@ -39,6 +39,7 @@ private:
 	gamePhase _phase;
 	bool _ending;
 	float _time;
+	float _volume;
 	
 public:
 	mainScene();

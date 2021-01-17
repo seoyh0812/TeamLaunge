@@ -160,5 +160,18 @@ void mainScene::cameraControl()
 		_pl->getFlyY() = CAMY - 200;
 	}
 
+
+
+	if (KEYMANAGER->isOnceKeyDown(VK_ADD))
+	{
+		if (_volume < 1.0f) _volume += 0.1f;
+		SOUNDMANAGER->setVolume(_volume);
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_SUBTRACT))
+	{
+		if (_volume > 0.0f) _volume -= 0.1f;
+		SOUNDMANAGER->setVolume(_volume);
+	}
+
 }
 

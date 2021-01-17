@@ -33,6 +33,7 @@ HRESULT mainScene::init()
 
 	SOUNDMANAGER->play("메인브금");
 	_time = 0.0f;
+	_volume = 1.0f;
 	return S_OK;
 }
 
@@ -80,4 +81,6 @@ void mainScene::render()
 	uiRender(); // 길어질거같아서 따로 뺴다씀
 
 	_pl->reRender();
+	
+	FINDIMG("볼륨바")->render(getMemDC(), CAMX + WINSIZEX - 58, CAMY + 5, 0, 0, 53 * _volume, 5);
 }

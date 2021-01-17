@@ -26,6 +26,7 @@ private:
 	System*			_system;
 	Sound**			_sound;
 	Channel**		_channel;
+	float _volume;
 
 	arrSounds		_mTotalSounds;
 
@@ -41,7 +42,9 @@ public:
 	void addSound(string keyName, string soundName, bool bgm, bool loop);
 
 	//                             0.0f ~ 1.0f -> 0 ~ 255
-	void play(string keyName, float volume = 1.0f);
+	void play(string keyName, float volume);
+	void play(string keyName);
+	void setVolume(float volume);
 	void stop(string keyName);
 	void pause(string keyName);
 	void resume(string keyName);

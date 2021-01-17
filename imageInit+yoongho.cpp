@@ -34,5 +34,5 @@ void playGround::imageInitYoongho()
 	IMAGEMANAGER->addImage("보스텍스트", "image/ui/bosstext.bmp", 168, 24, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addFrameImage("플레이어죽음", "image/player/dead.bmp", 1665, 588, 5, 2, true, RGB(255, 0, 255));
-
+	IMAGEMANAGER->addImage("볼륨바", "hpBarTop.BMP", 53, 5, false, RGB(255, 0, 255));
 }
