@@ -111,6 +111,124 @@ void player::playerRender()
 	}
 }
 
+void player::reRender()
+{
+	//이미지 중점용변수입니다
+
+	float imageCenterX = (((_flyRc.left + _flyRc.right) / 2) - (playerImage->getFrameWidth() / 2));
+	float imageCenterY = (((_flyRc.bottom + _flyRc.top) / 2) - (playerImage->getFrameHeight() / 2));
+
+
+	switch (_enumState)
+	{
+	case DEAD:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50); // 상태에 따라 그림자렉트를 만들게 해줬고, 각각의 상태에서 참조하는 좌표와 크기를 다르게 해줬습니다.
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX - 28, imageCenterY - 16, _index, 0, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX + 28, imageCenterY - 16, _index, 1, 150);
+		break;
+	case IDLE:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX - 28, imageCenterY - 16, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX + 28, imageCenterY - 16, 150);
+		break;
+	case CIDLEANIMATION:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX, imageCenterY - 16, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX, imageCenterY - 16, 150);
+		break;
+	case JUMP:
+		_shadowWidth = 200 - ((_groundRc.bottom - _flyRc.bottom) / 2); // 점프 및 점프공격 상태일 땐 점프하는 위치만큼 그림자 렉트를 줄여서 만들게 했습니다.
+		if (_shadowWidth < 0) _shadowWidth = 0;
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, _shadowWidth, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 23, imageCenterY - 18, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 23, imageCenterY - 18, 150);
+		break;
+	case WALK:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 125, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX - 21, imageCenterY - 18, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX + 21, imageCenterY - 18, 150);
+		break;
+	case RUN:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX, imageCenterY - 16, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX, imageCenterY - 16, 150);
+		break;
+	case HIT:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX - 15, imageCenterY - 15, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX + 15, imageCenterY - 15, 150);
+		break;
+	case COMBO1:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 65, imageCenterY, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 65, imageCenterY, 150);
+		break;
+	case COMBO11:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 15, imageCenterY - 10, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 15, imageCenterY - 10, 150);
+		break;
+	case COMBO12:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 55, imageCenterY - 52, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 55, imageCenterY - 52, 150);
+		break;
+	case COMBO13:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 70, imageCenterY - 30, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 70, imageCenterY - 30, 150);
+		break;
+	case COMBO21:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 35, imageCenterY - 30, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 35, imageCenterY - 30, 150);
+		break;
+	case COMBO22:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX - 20, imageCenterY - 10, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX + 20, imageCenterY - 10, 150);
+		break;
+	case COMBO23:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 75, imageCenterY - 5, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 75, imageCenterY - 5, 150);
+		break;
+	case SLIDE:
+		_shadow = RectMakeCenter(_flyX, _flyRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX - 40, imageCenterY + 15, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX + 40, imageCenterY + 15, 150);
+		break;
+	case TACKLE:
+		_shadow = RectMakeCenter(_flyX, _flyRc.bottom, 150, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX, imageCenterY - 10, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX, imageCenterY - 10, 150);
+		break;
+	case JUMPATTACK:
+		_shadowWidth = 200 - ((_groundRc.bottom - _flyRc.bottom) / 2);
+		if (_shadowWidth < 0) _shadowWidth = 0;
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, _shadowWidth, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 60, imageCenterY - 10, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 60, imageCenterY - 10, 150);
+		break;
+	case GRAB:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 23, imageCenterY - 15, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 23, imageCenterY - 15, 150);
+		break;
+	case GRABSWING:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX + 60, imageCenterY - 25, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX - 60, imageCenterY - 25, 150);
+		break;
+	case WINDMILL:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 125, 50);
+		if (!_left) playerImage->alphaFrameRender(getMemDC(), imageCenterX, imageCenterY - 35, 150);
+		else playerImage->alphaFrameRender(getMemDC(), imageCenterX, imageCenterY - 35, 150);
+		break;
+
+	}
+}
+
 //상태설정
 
 void player::setState(State state)

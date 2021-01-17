@@ -53,6 +53,7 @@ private:
     bool _isGrab;
 	int _flyCount; // 적당한 때에 날아가기 위한 카운트
 
+
 	// ############ 커맨드 입력 관련 변수(대시, 특수기) #############
 	int _directionChanged;		// 좌우가 몇번 바뀌었는지 카운트(커맨드)
 	int _directionChangeCount;	// 카운트체크해서 내림
@@ -73,6 +74,7 @@ public:
 	void minusDirectionChanged();
 
 	void playerRender();
+	void reRender();
 
 	//세터와 게터들입니다
 	void setState(State state);
@@ -96,5 +98,6 @@ public:
     float& getPlHP() { return _currentHP; }
     void getDamage(int x) { _currentHP -= x; }
 	int& getFlyCount() { return _flyCount; }
+
 };
 
